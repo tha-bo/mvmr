@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "420819124087",
+    "firebase_url": "https://mvmr-f9e93.firebaseio.com",
+    "project_id": "mvmr-f9e93",
+    "storage_bucket": "mvmr-f9e93.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:420819124087:android:7e06def2d3da134f",
+        "android_client_info": {
+          "package_name": "mvmr.mvmr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "420819124087-t9sboqjnvf230tfhd5vhkmm5lq5gncok.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsMZOy7EqmhWkqKuyTlgf3Yg19C6sNBgs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
