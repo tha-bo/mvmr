@@ -15,15 +15,19 @@ import android.os.Process;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+
 public class ListennerService extends Service {
     public ListennerService() {
     }
 
+    protected DatabaseReference mDatabase;
+    protected FirebaseAuth mAuth;
     private Looper mServiceLooper;
     private ServiceHandler mServiceHandler;
     private ScreenOnReceiver on;
     private ScreenOffReceiver off;
-    private SQLiteDatabase _dbMvmr;
 
     // Handler that receives messages from the thread
     private final class ServiceHandler extends Handler {

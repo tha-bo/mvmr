@@ -9,6 +9,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -16,11 +18,13 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import mvmr.mvmr.models.UsageModel;
+import mvmr.mvmr.models.UserModel;
+
 import static android.content.ContentValues.TAG;
 
 public class ScreenOnReceiver extends BroadcastReceiver {
 
-    private SQLiteDatabase _dbMvmr;
     @Override
     public void onReceive(final Context context,final Intent intent) {
         // TODO: This method is called when the BroadcastReceiver is receiving
@@ -35,22 +39,19 @@ public class ScreenOnReceiver extends BroadcastReceiver {
                 sb.append("URI: " + "I turned on" + "\n");
                 Log.d("brrbrbrb", sb.toString());
 
-
-
-                //_dbMvmr = context.openOrCreateDatabase("MVMR_lit", context.MODE_PRIVATE, null);
-                //Cursor resultSet = _dbMvmr.rawQuery("SELECT * FROM table WHERE id = (SELECT MAX(ID) FROM table);", null);
-                //resultSet.moveToFirst();
-                //resultSet.getString();
-                //_dbMvmr.execSQL("INSERT INTO Source (Lit) VALUES(datetime('now'));");
-
                 String id = java.util.UUID.randomUUID().toString();
+                String userId = context.getSharedPreferences("MVMR", 0).getString("user_id", null);
+                String lit = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date());
                 SharedPreferences.Editor settingsEditor = context.getSharedPreferences("MVMR", 0).edit();
                 SharedPreferences.Editor rowEditor = context.getSharedPreferences("MVMR_lit", 0).edit();
 
-                rowEditor.putString(id, new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date()));
+                rowEditor.putString(id, lit);
                 settingsEditor.putString("row", id);
                 settingsEditor.commit();
                 rowEditor.commit();
+
+                ((ListennerService)context).mDatabase = FirebaseDatabase.getInstance().getReference();
+                ((ListennerService)context).mDatabase.child("usage").child(id).setValue(new UsageModel(userId, lit, null));
 
                 // Must call finish() so the BroadcastReceiver can be recycled.
                 pendingResult.finish();

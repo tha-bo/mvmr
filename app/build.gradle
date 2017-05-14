@@ -6,7 +6,7 @@ android {
     defaultConfig {
         applicationId "mvmr.mvmr"
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 17
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -17,9 +17,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets { main { java.srcDirs = ['src/main/java', 'src/shared'] } }
 }
 
 dependencies {
+    compile 'com.google.firebase:firebase-auth:10.2.4'
+    compile 'com.google.firebase:firebase-database:10.2.4'
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
