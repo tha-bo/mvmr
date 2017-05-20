@@ -13,7 +13,6 @@ public class UserModel {
 
     public UserModel(String man,String model,String ros)
     {
-        //this.UserName = us;
         this.Manufacterer = man;
         this.Model = model;
         this.Version = ros;

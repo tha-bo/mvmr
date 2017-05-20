@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 
 /**
@@ -18,16 +20,10 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class SurveyQuestionFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
+    private OnFragmentInteractionListener mListener; // parent activity
+    private int result;
+    private int questionId;
+    private String question;
 
     public SurveyQuestionFragment() {
         // Required empty public constructor
@@ -36,17 +32,15 @@ public class SurveyQuestionFragment extends Fragment {
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment SurveyQuestionFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SurveyQuestionFragment newInstance(String param1, String param2) {
+    public static SurveyQuestionFragment newInstance(int id, String question, int result) {
         SurveyQuestionFragment fragment = new SurveyQuestionFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putInt("Id", id);
+        args.putInt("Result", result);
+        args.putString("Question", question);
         fragment.setArguments(args);
         return fragment;
     }
@@ -54,9 +48,13 @@ public class SurveyQuestionFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        result = questionId = 0;
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            questionId = getArguments().getInt("Id");
+            result = getArguments().getInt("Result");
+            question = getArguments().getString("Question");
+
+
         }
     }
 
@@ -65,13 +63,6 @@ public class SurveyQuestionFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_survey_question, container, false);
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
@@ -86,9 +77,70 @@ public class SurveyQuestionFragment extends Fragment {
     }
 
     @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        RadioGroup group = (RadioGroup) view.findViewById(R.id.rGroup);
+        switch(result) {
+            case 1:
+                group.check(R.id.r1);
+                break;
+            case 2:
+                group.check(R.id.r2);
+                break;
+            case 3:
+                group.check(R.id.r3);
+                break;
+            case 4:
+                group.check(R.id.r4);
+                break;
+            case 5:
+                group.check(R.id.r5);
+                break;
+        }
+    }
+
+    @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.r1:
+                if (checked)
+                    result = 1;
+                    break;
+            case R.id.r2:
+                if (checked)
+                    result = 2;
+                    break;
+            case R.id.r3:
+                if (checked)
+                    result = 3;
+                    break;
+            case R.id.r4:
+                if (checked)
+                    result = 4;
+                    break;
+            case R.id.r5:
+                if (checked)
+                    result = 5;
+                    break;
+        }
+        if (mListener != null) {
+            mListener.onFragmentInteraction(questionId, result);
+        }
+    }
+
+    public int GetResult()
+    {
+        return result;
     }
 
     /**
@@ -103,6 +155,6 @@ public class SurveyQuestionFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onFragmentInteraction(int uri, int result);
     }
 }

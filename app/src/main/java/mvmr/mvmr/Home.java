@@ -49,11 +49,20 @@ public class Home extends AppCompatActivity {
             }
         });
 
-        Button btn = (Button) findViewById(R.id.about_button);
-        btn.setOnClickListener(new View.OnClickListener(){
+        Button btnAbout = (Button) findViewById(R.id.about_button);
+        btnAbout.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 Intent i = new Intent(Home.this, AboutActivity.class);
+                startActivity(i);
+            }
+        });
+
+        Button btnSurvey = (Button) findViewById(R.id.survey_button);
+        btnSurvey.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent i = new Intent(Home.this, Survey.class);
                 startActivity(i);
             }
         });

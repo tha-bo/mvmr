@@ -11,6 +11,18 @@
         <item>com.reddit.frontpage, reddit</item>
         <item>com.valvesoftware.android.steam.community, steam</item>
     </string-array>
+    <string-array name="survey">
+        <item>I often think about my mobile phone when I am not using it</item>
+        <item>I often use my mobile phone for no particular reason</item>
+        <item>Arguments have arisen with others because of my mobile phone use</item>
+        <item>I interrupt whatever else I do when I am contacted on my mobile phone</item>
+        <item>I feel connected to others when I use my mobile phone</item>
+        <item>I lose track of times I use my mobile phone</item>
+        <item>The thought of being without my mobile phone makes me feel distressed</item>
+        <item>I have been unable to reduce the number of times I use my mobile phone</item>
+        <item>I am comfortable using mobile phone technology</item>
+        <item>I feel confident using mobile phone technology</item>
+    </string-array>
     <string name="title_activity_survey">Survey</string>
 
     <!-- TODO: Remove or change this placeholder text -->
