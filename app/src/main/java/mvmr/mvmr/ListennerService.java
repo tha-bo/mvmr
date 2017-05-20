@@ -1,23 +1,22 @@
 package mvmr.mvmr;
 
 import android.app.Service;
-import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.database.sqlite.SQLiteDatabase;
-import android.net.ConnectivityManager;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.os.Process;
-import android.util.Log;
+import android.support.annotation.NonNull;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
-
 public class ListennerService extends Service {
     public ListennerService() {
     }
@@ -39,11 +38,24 @@ public class ListennerService extends Service {
             // Normally we would do some work here, like download a file.
             // For our sample, we just sleep for 5 seconds.
             try {
-                Thread.sleep(5000);
-                Log.d("brrbrbrb", "start");
-            } catch (InterruptedException e) {
+
+                mAuth = FirebaseAuth.getInstance();
+                mAuth.signInAnonymously().addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(ListennerService.this, "login success", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            Toast.makeText(ListennerService.this, "login failed", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+            } catch (Exception e) {
+                Toast.makeText(ListennerService.this, "login error", Toast.LENGTH_SHORT).show();
                 // Restore interrupt status.
-                Thread.currentThread().interrupt();
+                //Thread.currentThread().interrupt();
             }
             // Stop the service using the startId, so that we don't stop
             // the service in the middle of handling another job
@@ -70,17 +82,6 @@ public class ListennerService extends Service {
         IntentFilter offfilter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
         this.registerReceiver(on, onfilter);
         this.registerReceiver(off, offfilter);
-
-        /*_dbMvmr = openOrCreateDatabase("MVMR", MODE_PRIVATE, null);
-
-        _dbMvmr.execSQL("CREATE TABLE IF NOT EXISTS Source(" +
-                "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "Lit DATETIME NULL," +
-                "UnLit DATETIME NULL);");
-        _dbMvmr.execSQL("INSERT INTO Source (Lit, UnLit) VALUES(NULL,NULL);");
-
-        _dbMvmr.execSQL("CREATE TABLE IF NOT EXISTS Version(" +
-                "Version VARCHAR NOT NULL);");*/
     }
 
     @Override

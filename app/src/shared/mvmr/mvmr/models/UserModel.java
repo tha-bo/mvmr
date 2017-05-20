@@ -6,13 +6,17 @@ package mvmr.mvmr.models;
 public class UserModel {
 
     //public String UserName;
-    public String Platform;
-    public boolean HasSocialMedia;
+    public String Manufacterer;
+    public String Model;
+    public String Version;
+    public String SocialMedia;
 
-    public UserModel(String pl)
+    public UserModel(String man,String model,String ros)
     {
         //this.UserName = us;
-        this.Platform = pl;
-        this.HasSocialMedia = false;
+        this.Manufacterer = man;
+        this.Model = model;
+        this.Version = ros;
+        this.SocialMedia = "";
     }
 }
