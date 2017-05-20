@@ -38,7 +38,17 @@
         <receiver
             android:name=".ScreenOffReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true" />
+
+        <activity
+            android:name=".Survey"
+            android:label="@string/title_activity_survey"
+            android:parentActivityName=".Home"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="mvmr.mvmr.Home" />
+        </activity>
     </application>
 
 </manifest>
