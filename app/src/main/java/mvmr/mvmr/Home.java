@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -116,42 +117,48 @@ public class Home extends AppCompatActivity {
     private void HandleLogin(){
         settings = getSharedPreferences("MVMR", 0);
 
-        mAuth = FirebaseAuth.getInstance();
-        mAuth.signInAnonymously().addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    String user_id = Home.this.settings.getString("user_id", null);
-                    if(user_id == null)
-                    {
-                        user_id = java.util.UUID.randomUUID().toString() + new SimpleDateFormat("_HH:mm:ss").format(new Date());
-                        SharedPreferences.Editor settingsEditor = settings.edit();
-                        settingsEditor.putString("user_id", user_id);
-                        settingsEditor.commit();
-                        //get phone type and apps here
-                        mDatabase = FirebaseDatabase.getInstance().getReference();
+        try {
+            mAuth = FirebaseAuth.getInstance();
+            mAuth.signInAnonymously().addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        String user_id = Home.this.settings.getString("user_id", null);
+                        if (user_id == null) {
+                            user_id = java.util.UUID.randomUUID().toString() + new SimpleDateFormat("_HH:mm:ss").format(new Date());
+                            SharedPreferences.Editor settingsEditor = settings.edit();
+                            settingsEditor.putString("user_id", user_id);
+                            settingsEditor.commit();
+                            //get phone type and apps here
+                            mDatabase = FirebaseDatabase.getInstance().getReference();
 
-                        UserModel user = new UserModel(
-                                Build.MANUFACTURER,
-                                Build.MODEL,
-                                Build.VERSION.RELEASE + " | " + Build.VERSION_CODES.class.getFields()[android.os.Build.VERSION.SDK_INT].getName()
-                        );
+                            UserModel user = new UserModel(
+                                    Build.MANUFACTURER,
+                                    Build.MODEL,
+                                    Build.VERSION.RELEASE + " | " + Build.VERSION_CODES.class.getFields()[android.os.Build.VERSION.SDK_INT].getName()
+                            );
 
-                        String[] socialMedia = getResources().getStringArray(R.array.known_sm);
+                            String[] socialMedia = getResources().getStringArray(R.array.known_sm);
 
-                        for (String sm: socialMedia) {
-                            if(appInstalledOrNot(sm.split(",")[0]))
-                            {
-                                user.SocialMedia += sm.split(",")[1] + " ";
+                            for (String sm : socialMedia) {
+                                if (appInstalledOrNot(sm.split(",")[0])) {
+                                    user.SocialMedia += sm.split(",")[1] + " ";
+                                }
                             }
-                        }
 
-                        mDatabase.child("users").child(user_id).setValue(user);
+                            mDatabase.child("users").child(user_id).setValue(user);
+                        }
+                        return;
                     }
-                    return;
+                    Log.w("asdasdasd", "signInAnonymously:failure", task.getException());
                 }
-                Log.w("asdasdasd", "signInAnonymously:failure", task.getException());
-            }
-        });
+            });
+        }
+
+        catch(Exception e)
+        {
+            //experience shouldnt end;
+            Toast.makeText(this, "login error", Toast.LENGTH_SHORT).show();
+        }
     }
 }

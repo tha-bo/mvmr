@@ -23,6 +23,7 @@
         <item>I am comfortable using mobile phone technology</item>
         <item>I feel confident using mobile phone technology</item>
     </string-array>
+    <string name="survey_instructions">Please respond to each of the questions on the page by selecting one the options. Select the Submit button to send the results</string>
     <string name="title_activity_survey">Survey</string>
 
     <!-- TODO: Remove or change this placeholder text -->

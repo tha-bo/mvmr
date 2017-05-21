@@ -40,6 +40,7 @@ public class Survey extends AppCompatActivity  implements SurveyQuestionFragment
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        surveyCache = getSharedPreferences("MVMR_Survey", 0);
         surveyQuestions = getResources().getStringArray(R.array.survey);
 
         for (int i = 0; i < surveyQuestions.length; i++) {
@@ -48,7 +49,7 @@ public class Survey extends AppCompatActivity  implements SurveyQuestionFragment
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-            SurveyQuestionFragment fragment = SurveyQuestionFragment.newInstance(i, surveyQuestions[i], result);
+            SurveyQuestionFragment fragment = SurveyQuestionFragment.newInstance(i, "Q" + (i + 1) + ". " + surveyQuestions[i] + "\n", result);
             fragmentTransaction.add(R.id.questionsContainer, fragment);
             fragmentTransaction.commit();
         }
@@ -57,7 +58,6 @@ public class Survey extends AppCompatActivity  implements SurveyQuestionFragment
 
     @Override
     public void onFragmentInteraction(int uri, int result) {
-        surveyCache = getSharedPreferences("MVMR_Survey", 0);
         SharedPreferences.Editor surveyCacheEditor = surveyCache.edit();
         surveyCacheEditor.putInt("question_" + uri, result);
         surveyCacheEditor.commit();
@@ -77,6 +77,9 @@ public class Survey extends AppCompatActivity  implements SurveyQuestionFragment
             }
             model.Result += value + ",";
         }
+        SharedPreferences.Editor surveyCacheEditor = surveyCache.edit();
+        surveyCacheEditor.putString("question_Results", model.Result);
+        surveyCacheEditor.commit();
         SendResults(model);
     }
 
@@ -97,17 +100,24 @@ public class Survey extends AppCompatActivity  implements SurveyQuestionFragment
                         mDatabase.child("survey")
                                 .child(modelId)
                                 .setValue(model);
+                        getSharedPreferences("MVMR", 0).edit().putInt("submittedSurvey", 1).commit();
                     }
                     else{
                         Toast.makeText(Survey.this, "login failed", Toast.LENGTH_SHORT).show();
+                        if(EmailSender.IsOnline(Survey.this))
+                        {
+                            EmailSender.Send(Survey.this);
+                        }
                     }
                 }
             });
 
         } catch (Exception e) {
             Toast.makeText(Survey.this, "login error", Toast.LENGTH_SHORT).show();
-            // Restore interrupt status.
-            //Thread.currentThread().interrupt();
+            if(EmailSender.IsOnline(this))
+            {
+                EmailSender.Send(this);
+            }
         }
     }
 }

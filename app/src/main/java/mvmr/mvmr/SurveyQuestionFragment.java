@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 
 /**
@@ -79,6 +80,50 @@ public class SurveyQuestionFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        //set click listenners
+        RadioButton r1 = (RadioButton) view.findViewById(R.id.r1);
+        r1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onRadioButtonClicked(view);
+            }
+        });
+
+        RadioButton r2 = (RadioButton) view.findViewById(R.id.r2);
+        r2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onRadioButtonClicked(view);
+            }
+        });
+
+        RadioButton r3 = (RadioButton) view.findViewById(R.id.r3);
+        r3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onRadioButtonClicked(view);
+            }
+        });
+
+        RadioButton r4 = (RadioButton) view.findViewById(R.id.r4);
+        r4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onRadioButtonClicked(view);
+            }
+        });
+
+        RadioButton r5 = (RadioButton) view.findViewById(R.id.r5);
+        r5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onRadioButtonClicked(view);
+            }
+        });
+
+        TextView qView = (TextView) view.findViewById(R.id.questionView);
+        qView.setText(question);
 
         RadioGroup group = (RadioGroup) view.findViewById(R.id.rGroup);
         switch(result) {
