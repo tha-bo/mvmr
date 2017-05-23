@@ -3,7 +3,7 @@
  */
 package mvmr.mvmr.models;
 
-public class UserModel {
+public class UserModel extends BaseModel {
 
     //public String UserName;
     public String Manufacterer;
@@ -13,6 +13,7 @@ public class UserModel {
 
     public UserModel(String man,String model,String ros)
     {
+        super();
         this.Manufacterer = man;
         this.Model = model;
         this.Version = ros;

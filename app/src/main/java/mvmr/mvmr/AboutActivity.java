@@ -24,24 +24,6 @@ public class AboutActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        Button btn = (Button) findViewById(R.id.btn_start_service);
-        btn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent i = new Intent(AboutActivity.this, ListennerService.class);
-                startService(i);
-            }
-        });
-
-        btn = (Button) findViewById(R.id.btn_stop_service);
-        btn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent i = new Intent(AboutActivity.this, ListennerService.class);
-                stopService(i);
-            }
-        });
-
     }
 
     @Override

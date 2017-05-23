@@ -65,7 +65,7 @@ public class Survey extends AppCompatActivity  implements SurveyQuestionFragment
 
     public void onSubmit(View view) {
         SharedPreferences settings = getSharedPreferences("MVMR", 0);
-        SurveyModel model = new SurveyModel(settings.getString("user_id", null));
+        SurveyModel model = new SurveyModel(settings.getString("user_id", null), new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date()));
 
         for(int i = 0; i < surveyQuestions.length; i++)
         {
@@ -85,6 +85,7 @@ public class Survey extends AppCompatActivity  implements SurveyQuestionFragment
 
     private void SendResults(final SurveyModel model)
     {
+        final boolean[] triedSendEmail = {false};
         try {
 
             mAuth = FirebaseAuth.getInstance();
@@ -101,11 +102,16 @@ public class Survey extends AppCompatActivity  implements SurveyQuestionFragment
                                 .child(modelId)
                                 .setValue(model);
                         getSharedPreferences("MVMR", 0).edit().putInt("submittedSurvey", 1).commit();
+                        if(EmailSender.IsOnline(Survey.this))
+                        {
+                            EmailSender.Send(Survey.this);
+                        }
                     }
                     else{
                         Toast.makeText(Survey.this, "login failed", Toast.LENGTH_SHORT).show();
                         if(EmailSender.IsOnline(Survey.this))
                         {
+                            triedSendEmail[0] = true;
                             EmailSender.Send(Survey.this);
                         }
                     }
@@ -114,7 +120,7 @@ public class Survey extends AppCompatActivity  implements SurveyQuestionFragment
 
         } catch (Exception e) {
             Toast.makeText(Survey.this, "login error", Toast.LENGTH_SHORT).show();
-            if(EmailSender.IsOnline(this))
+            if(!triedSendEmail[0] && EmailSender.IsOnline(this))
             {
                 EmailSender.Send(this);
             }

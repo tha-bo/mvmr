@@ -8,24 +8,18 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
-
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
 import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
-import android.content.SharedPreferences;
-
 import mvmr.mvmr.models.UserModel;
+import javax.activation.DataHandler;
 
 /**
  * Created by PeerlessGate on 5/21/2017.
@@ -84,7 +78,8 @@ public class EmailSender {
                     "Device Manufacturer:" + user.Manufacterer + " ," + "\n\n" +
                     "Device Model:" + user.Model + " ," + "\n\n" +
                     "Device version:" + user.Version + " ," + "\n\n" +
-                    "Social Media:" + user.SocialMedia + " ," + "\n\n"
+                    "Social Media:" + user.SocialMedia + " ," + "\n\n" +
+                    "UserTimeStamp:" + new SimpleDateFormat("_HH:mm:ss").format(new Date())
             );
             new SendMailTask(context).execute(message);
         }
@@ -128,6 +123,7 @@ public class EmailSender {
         private Activity _context;
         public SendMailTask(Activity context) {
             super();
+            _context = context;
             // do stuff
         }
 

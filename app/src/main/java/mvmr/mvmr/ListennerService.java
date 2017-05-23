@@ -1,19 +1,26 @@
 package mvmr.mvmr;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.os.Process;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -38,6 +45,16 @@ public class ListennerService extends Service {
             // Normally we would do some work here, like download a file.
             // For our sample, we just sleep for 5 seconds.
             try {
+                Log.d("onTaskRemoved", "handled");
+                FirebaseApp.initializeApp(ListennerService.this);
+
+                on = new ScreenOnReceiver();
+                off = new ScreenOffReceiver();
+
+                IntentFilter onfilter = new IntentFilter(Intent.ACTION_SCREEN_ON);
+                IntentFilter offfilter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
+                ListennerService.this.registerReceiver(on, onfilter);
+                ListennerService.this.registerReceiver(off, offfilter);
 
                 mAuth = FirebaseAuth.getInstance();
                 mAuth.signInAnonymously().addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -54,6 +71,7 @@ public class ListennerService extends Service {
 
             } catch (Exception e) {
                 Toast.makeText(ListennerService.this, "login error", Toast.LENGTH_SHORT).show();
+                throw e;
                 // Restore interrupt status.
                 //Thread.currentThread().interrupt();
             }
@@ -75,18 +93,14 @@ public class ListennerService extends Service {
         // Get the HandlerThread's Looper and use it for our Handler
         mServiceLooper = thread.getLooper();
         mServiceHandler = new ServiceHandler(mServiceLooper);
-        on = new ScreenOnReceiver();
-        off = new ScreenOffReceiver();
 
-        IntentFilter onfilter = new IntentFilter(Intent.ACTION_SCREEN_ON);
-        IntentFilter offfilter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
-        this.registerReceiver(on, onfilter);
-        this.registerReceiver(off, offfilter);
+        // setup handler for uncaught exception
+        defaultUEH = Thread.getDefaultUncaughtExceptionHandler();
+        Thread.setDefaultUncaughtExceptionHandler(uncaughtExceptionHandler);
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Toast.makeText(this, "service starting", Toast.LENGTH_SHORT).show();
 
         // For each start request, send a message to start a job and deliver the
         // start ID so we know which request we're stopping when we finish the job
@@ -95,7 +109,10 @@ public class ListennerService extends Service {
         mServiceHandler.sendMessage(msg);
 
         // If we get killed, after returning from here, restart
-        return START_STICKY;
+        int start = getApplicationInfo().targetSdkVersion < Build.VERSION_CODES.ECLAIR ?
+                START_STICKY_COMPATIBILITY : START_STICKY;
+        return start;
+
     }
 
     @Override
@@ -110,4 +127,40 @@ public class ListennerService extends Service {
         this.unregisterReceiver(off);
         Toast.makeText(this, "service done", Toast.LENGTH_SHORT).show();
     }
+
+    //restart a killed service
+    //https://stackoverflow.com/questions/8943288/how-to-implement-uncaughtexception-android
+    @Override
+    public void onTaskRemoved(Intent rootIntent) {
+            /*Intent restartServiceTask = new Intent(getApplicationContext(),this.getClass());
+            restartServiceTask.setPackage(getPackageName());
+            PendingIntent servicex = PendingIntent.getService(
+                    this,
+                    1,
+                    restartServiceTask,
+                    0);
+            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime()
+                    + 1000, servicex);
+            super.onTaskRemoved(rootIntent);*/
+    }
+
+    private Thread.UncaughtExceptionHandler defaultUEH;
+    private Thread.UncaughtExceptionHandler uncaughtExceptionHandler = new Thread.UncaughtExceptionHandler() {
+
+        @Override
+        public void uncaughtException(Thread thread, Throwable ex) {
+            Intent restartServiceTask = new Intent(getApplicationContext(),this.getClass());
+            restartServiceTask.setPackage(getPackageName());
+            PendingIntent servicex = PendingIntent.getService(
+                    getApplicationContext(),
+                    1,
+                    restartServiceTask,
+                    0);
+            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime()
+                    + 1000, servicex);
+            System.exit(2);
+        }
+    };
 }
