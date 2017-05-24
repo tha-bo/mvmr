@@ -23,6 +23,22 @@
         <item>I am comfortable using mobile phone technology</item>
         <item>I feel confident using mobile phone technology</item>
     </string-array>
+    <string-array name="report_platform_entries">
+        <item>What platform did it occur on?</item>
+        <item>Voice Call</item>
+        <item>Text Message</item>
+        <item>Chat App</item>
+        <item>Social Media</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="report_victim_entries">
+        <item>Were you the victim?</item>
+        <item>Yes</item>
+        <item>No</item>
+        <item>Rather not say</item>
+    </string-array>
+    <string name="report_victim_text">Were you the victim?</string>
+    <string name="report_platform_text">What platform did it occur on?</string>
     <string name="survey_instructions">Please respond to each of the questions on the page by selecting one the options. Select the Submit button to send the results</string>
     <string name="title_activity_survey">Survey</string>
     <string name="lorem">
@@ -32,4 +48,5 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_report">Report</string>
 </resources>

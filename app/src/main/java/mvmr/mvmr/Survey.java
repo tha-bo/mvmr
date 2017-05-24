@@ -104,15 +104,17 @@ public class Survey extends AppCompatActivity  implements SurveyQuestionFragment
                         getSharedPreferences("MVMR", 0).edit().putInt("submittedSurvey", 1).commit();
                         if(EmailSender.IsOnline(Survey.this))
                         {
-                            EmailSender.Send(Survey.this);
+                            EmailSender.SendSurvey(Survey.this, model);
                         }
+                        surveyCache.edit().clear().commit();
                     }
                     else{
                         Toast.makeText(Survey.this, "login failed", Toast.LENGTH_SHORT).show();
                         if(EmailSender.IsOnline(Survey.this))
                         {
                             triedSendEmail[0] = true;
-                            EmailSender.Send(Survey.this);
+                            EmailSender.SendSurvey(Survey.this, model);
+                            surveyCache.edit().clear().commit();
                         }
                     }
                 }
@@ -122,7 +124,13 @@ public class Survey extends AppCompatActivity  implements SurveyQuestionFragment
             Toast.makeText(Survey.this, "login error", Toast.LENGTH_SHORT).show();
             if(!triedSendEmail[0] && EmailSender.IsOnline(this))
             {
-                EmailSender.Send(this);
+                EmailSender.SendSurvey(this, model);
+                surveyCache.edit().clear().commit();
+            }
+
+            else
+            {
+                Toast.makeText(Survey.this, "Send Survey Error", Toast.LENGTH_SHORT).show();
             }
         }
     }

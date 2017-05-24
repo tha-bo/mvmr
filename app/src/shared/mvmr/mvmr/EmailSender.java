@@ -18,6 +18,9 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import mvmr.mvmr.models.ReportModel;
+import mvmr.mvmr.models.SurveyModel;
 import mvmr.mvmr.models.UserModel;
 import javax.activation.DataHandler;
 
@@ -33,8 +36,20 @@ public class EmailSender {
     private static final String password = "mvmrPass123";
 
 
+    public static void SendSurvey(Activity context, SurveyModel model)
+    {
+        Send(context, "Survey Result", "Survey Result:" + model.Result);
+    }
 
-    public static void Send(Activity context)
+    public static void SendReport(Activity context, ReportModel model)
+    {
+        Send(context, "Report Result", "Date:" + model.Date + " ," + "\n\n" +
+                "Description:" + model.Description + " ," + "\n\n" +
+                "Platform Occurred:" + model.PlatformOccurred + " ," + "\n\n" +
+                "Is Victim:" + model.IsVictim);
+    }
+
+    private static void Send(Activity context,String subject, String text)
     {
         UserModel user = new UserModel(
                 Build.MANUFACTURER,
@@ -52,7 +67,7 @@ public class EmailSender {
         }
 
         String user_id = context.getSharedPreferences("MVMR", 0).getString("user_id", null);
-        String surveyResults = context.getSharedPreferences("MVMR_Survey", 0).getString("question_Results", null);
+
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -72,9 +87,9 @@ public class EmailSender {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("mvmrClient@gmail.com"));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("mvmrClient@gmail.com"));
-            message.setSubject("Survey Response");
-            message.setText("UserId:" + user_id + " ," + "\n\n" +
-                    "Survey Result:" + surveyResults + " ," + "\n\n" +
+            message.setSubject(subject);
+            message.setText(text + " ," + "\n\n" +
+                    "UserId:" + user_id + " ," + "\n\n" +
                     "Device Manufacturer:" + user.Manufacterer + " ," + "\n\n" +
                     "Device Model:" + user.Model + " ," + "\n\n" +
                     "Device version:" + user.Version + " ," + "\n\n" +

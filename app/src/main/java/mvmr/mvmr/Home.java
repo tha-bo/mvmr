@@ -72,6 +72,15 @@ public class Home extends AppCompatActivity {
             }
         });
 
+        Button btnReport = (Button) findViewById(R.id.report_button);
+        btnReport.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent i = new Intent(Home.this, Report.class);
+                startActivity(i);
+            }
+        });
+
         HandleLogin();
         Intent i = new Intent(this, ListennerService.class);
         startService(i);

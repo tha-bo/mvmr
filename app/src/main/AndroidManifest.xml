@@ -34,7 +34,7 @@
             android:exported="true" />
 
         <service
-            android:name="mvmr.mvmr.ListennerService"
+            android:name=".ListennerService"
             android:enabled="true"
             android:exported="true"
             android:process=":remoteMVMR" />
@@ -63,6 +63,15 @@
             </intent-filter>
         </receiver>
 
+        <activity
+            android:name=".Report"
+            android:label="@string/title_activity_report"
+            android:parentActivityName=".Home"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="mvmr.mvmr.Home" />
+        </activity>
     </application>
 
 </manifest>

@@ -25,6 +25,9 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    compile files('libs/activation.jar')
+    compile files('libs/additionnal.jar')
+    compile files('libs/mail.jar')
     compile 'com.google.firebase:firebase-auth:10.2.4'
     compile 'com.google.firebase:firebase-database:10.2.4'
     compile 'com.android.support:appcompat-v7:25.3.1'
@@ -32,8 +35,5 @@ dependencies {
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:support-v4:25.3.1'
     testCompile 'junit:junit:4.12'
-    compile files('libs/activation.jar')
-    compile files('libs/additionnal.jar')
-    compile files('libs/mail.jar')
 }
 apply plugin: 'com.google.gms.google-services'
