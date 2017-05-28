@@ -1,13 +1,18 @@
 package mvmr.mvmr;
 
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -60,43 +65,34 @@ public class Report extends AppCompatActivity implements DatePickerFragment.OnDa
         });
 
         EditText r_description = (EditText) findViewById(R.id.report_description);
-        r_description.setOnFocusChangeListener(  new View.OnFocusChangeListener() {
+
+        Spinner r_platform = (Spinner) findViewById(R.id.report_platform);
+        r_platform.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
+
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus && ((EditText)v).getText() != null);
-                {
-                    reportCache.edit().putString("description", ((EditText)v).getText().toString()).commit();
-                }
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                reportCache.edit().putInt("platform", (int)(parent).getSelectedItemId()).commit();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
-        Spinner r_platform = (Spinner) findViewById(R.id.report_platform);
-//        r_platform.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
-//
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                reportCache.edit().putInt("platform", (int)((Spinner)view).getSelectedItemId()).commit();
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
-
         Spinner r_victim = (Spinner) findViewById(R.id.report_victim);
-//        r_victim.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
-//
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                reportCache.edit().putInt("victim", (int)((Spinner)view).getSelectedItemId()).commit();
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
+        r_victim.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                reportCache.edit().putInt("victim", (int)(parent).getSelectedItemId()).commit();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         r_date.setText(reportCache.getString("date", null));
         r_description.setText(reportCache.getString("description", null));
@@ -163,12 +159,14 @@ public class Report extends AppCompatActivity implements DatePickerFragment.OnDa
                         mDatabase.child("survey")
                                 .child(modelId)
                                 .setValue(model);
-                        getSharedPreferences("MVMR", 0).edit().putInt("submittedSurvey", 1).commit();
+
                         if(EmailSender.IsOnline(Report.this))
                         {
                             EmailSender.SendReport(Report.this, model);
                         }
                         reportCache.edit().clear().commit();
+                        getSharedPreferences("MVMR", 0).edit().putInt("submittedReport", 1).commit();
+                        ShowResult(true);
                     }
                     else{
                         Toast.makeText(Report.this, "login failed", Toast.LENGTH_SHORT).show();
@@ -177,6 +175,14 @@ public class Report extends AppCompatActivity implements DatePickerFragment.OnDa
                             triedSendEmail[0] = true;
                             EmailSender.SendReport(Report.this, model);
                             reportCache.edit().clear().commit();
+                            getSharedPreferences("MVMR", 0).edit().putInt("submittedReport", 1).commit();
+                            ShowResult(true);
+                        }
+
+                        else
+                        {
+                            Toast.makeText(Report.this, "Send Report Error", Toast.LENGTH_SHORT).show();
+                            ShowResult(false);
                         }
                     }
                 }
@@ -188,11 +194,46 @@ public class Report extends AppCompatActivity implements DatePickerFragment.OnDa
             {
                 EmailSender.SendReport(this, model);
                 reportCache.edit().clear().commit();
+                getSharedPreferences("MVMR", 0).edit().putInt("submittedReport", 1).commit();
+                ShowResult(true);
             }
             else
             {
                 Toast.makeText(Report.this, "Send Report Error", Toast.LENGTH_SHORT).show();
+                ShowResult(false);
             }
         }
+    }
+
+    private void ShowResult(boolean isSuccess)
+    {
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        if(isSuccess)
+            builder1.setMessage("Your report has been received.");
+        else
+            builder1.setMessage("We have failed to send your report, please check your network connection or try again later. We' ll save your responses so you can pick up where you left off");
+        builder1.setCancelable(false);
+
+        builder1.setPositiveButton(
+                "Done",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                        EditText r_description = (EditText) findViewById(R.id.report_description);
+                        r_description.setText(null);
+                        Report.this.finish();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        EditText r_description = (EditText) findViewById(R.id.report_description);
+        if(r_description.getText() != null)
+            reportCache.edit().putString("description", r_description.getText().toString()).commit();
     }
 }

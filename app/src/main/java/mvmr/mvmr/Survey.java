@@ -1,5 +1,6 @@
 package mvmr.mvmr;
 
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,10 +9,12 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -101,12 +104,14 @@ public class Survey extends AppCompatActivity  implements SurveyQuestionFragment
                         mDatabase.child("survey")
                                 .child(modelId)
                                 .setValue(model);
-                        getSharedPreferences("MVMR", 0).edit().putInt("submittedSurvey", 1).commit();
+
                         if(EmailSender.IsOnline(Survey.this))
                         {
                             EmailSender.SendSurvey(Survey.this, model);
                         }
                         surveyCache.edit().clear().commit();
+                        getSharedPreferences("MVMR", 0).edit().putInt("submittedSurvey", 1).commit();
+                        ShowResult(true);
                     }
                     else{
                         Toast.makeText(Survey.this, "login failed", Toast.LENGTH_SHORT).show();
@@ -115,6 +120,13 @@ public class Survey extends AppCompatActivity  implements SurveyQuestionFragment
                             triedSendEmail[0] = true;
                             EmailSender.SendSurvey(Survey.this, model);
                             surveyCache.edit().clear().commit();
+                            getSharedPreferences("MVMR", 0).edit().putInt("submittedSurvey", 1).commit();
+                            ShowResult(true);
+                        }
+                        else
+                        {
+                            Toast.makeText(Survey.this, "Send Survey Error", Toast.LENGTH_SHORT).show();
+                            ShowResult(false);
                         }
                     }
                 }
@@ -126,12 +138,37 @@ public class Survey extends AppCompatActivity  implements SurveyQuestionFragment
             {
                 EmailSender.SendSurvey(this, model);
                 surveyCache.edit().clear().commit();
+                getSharedPreferences("MVMR", 0).edit().putInt("submittedSurvey", 1).commit();
+                ShowResult(true);
             }
 
             else
             {
                 Toast.makeText(Survey.this, "Send Survey Error", Toast.LENGTH_SHORT).show();
+                ShowResult(false);
             }
         }
+    }
+
+    private void ShowResult(boolean isSuccess)
+    {
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        if(isSuccess)
+            builder1.setMessage("Your survey has been received.");
+        else
+            builder1.setMessage("We have failed to send your survey, please check your network connection or try again later. We' ll save your responses so you can pick up where you left off");
+        builder1.setCancelable(false);
+
+        builder1.setPositiveButton(
+                "Done",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                        Survey.this.finish();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
     }
 }
