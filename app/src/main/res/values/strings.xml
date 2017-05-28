@@ -46,7 +46,65 @@
 
     </string>
 
+    <string name="about1">
+        Many different forms of technology may be used to carry out cyberbullying. When cyberbullying is carried out through the use of mobile phones, it is known as mobile bullying. Kowalski et al. (2008) have defined mobile bullying as a form of cyberbullying through email, chatrooms, instant messaging and small text messages using mobile phones.
+    </string>
+
+    <string name="about2">
+        Mobile victimisation is in turn is the result of mobile bullying. Victimisation has often been studied as an act that stems from bullying. Coincidentally, similar definitions have been given for both victimisation and bullying. Meaning that those people who are bullied are victims of bullying as they would have been victimised through the process of bullying. As a result, victimisation can be said to be a result of the activity of bullying.
+    </string>
+
+    <string name="about3">
+        It has been found that the experience of school and electronic victimisation is associated with loneliness, peer rejection, lower self-esteem and self-efﬁcacy, higher stress, anxiety, and depressive symptoms which at times are found to be at high levels among youthful populations.
+Victimisation is often unpredictable, unpreventable and unexpected. It frightens and unsettles victims, leaving them confused, frustrated, fearful and angry. In some case, especially among adolescents, cyberbullying (in general) has left victims feeling helpless, vulnerable and subsequently suicidal. According to Hinduja and Patchin (2010), there exists a relationship between bullying and suicide and they found that cyberbullying is related to high suicidal ideation among youth. As a result, victims of cyberbullying are more likely to consider suicide due to the negative impacts of bullying (Collins, 2012; North Shore-Long Island Jewish (LIJ) Health System, 2015).
+    </string>
+
+    <string name="about4">
+Bearing in mind the negative consequences of mobile victimisation and the vast impact it has had on many students, the MVMR app aims to be a  digitally based tool that may be used as an intervention method. This app aims to be useful in the monitoring and reporting of mobile victimisation, especially among high school students. Thereby creating a means by which their victimisation may be known and addressed.
+    </string>
+
+    <string name="about5">
+In monitoring and reporting mobile victimisation using the MVRM app, it is intended not only to intervene mobile victimisation but also to understand it further so that awareness of mobile victimisation is created and the development of laws and policies that control mobile bullying  and victimisation may be better informed.
+    </string>
+
+    <string name="howTo1">
+Before you use the MVMR application, please read and understand the page "About Mobile Victimisation". This page should help you understand what mobile victimisation is, where it stems from and how it may have or is affecting you.
+    </string>
+
+    <string name="howTo2">
+This app was created so that the user my be able to monitor and report mobile victimisation. To do so, please follows steps 1 and 2 below.
+    </string>
+
+    <string name="howTo3">
+Please take the survey on the "Mobile Victimisation" page. This is so that we may have some understanding of the manner in which you have been using your mobile phone. This will help in identifying and monitoring the likelihood of mobile victimisation. This will be done only once when you start using the app and is optional.
+    </string>
+
+    <string name="howTo4">
+To report mobile victimisation, please go to the "Report Mobile Victimisation" page. On this page, you may send a message which will be delivered by text to us. Upon receiving your text, we will be able to contact you as soon as possible. If you wish not to be contacted, please refer to the "Contacts and Resources" page for sources which may inform you on how to cope with the mobile victimisation.
+    </string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_report">Report</string>
+    <string name="title_activity_contacts">Contacts</string>
+
+    <string-array name="contact_phone">
+        <item>SAPS Crime Stop | +27860010111</item>
+        <item>TabuPhone | +270783014518</item>
+    </string-array>
+
+    <string-array name="contact_web">
+        <item>SAPS | https://en.wikipedia.org/wiki/Example.com</item>
+        <item>TestWeb | https://en.wikipedia.org/wiki/Example.com</item>
+    </string-array>
+
+    <string-array name="contact_sms">
+        <item>TabuSMS | +270783014518</item>
+        <item>TabuSMS2 | +270783014518</item>
+    </string-array>
+
+    <string-array name="contact_email">
+        <item>SAPS | childprotect@saps.org.za</item>
+        <item>TestEmail | mvmrclient@google.com</item>
+    </string-array>
 </resources>

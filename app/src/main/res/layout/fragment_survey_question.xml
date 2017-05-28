@@ -10,7 +10,7 @@
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/questionView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
@@ -77,7 +77,7 @@
     </RadioGroup>
 
     <View
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"

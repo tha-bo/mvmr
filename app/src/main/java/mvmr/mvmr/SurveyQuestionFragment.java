@@ -54,8 +54,6 @@ public class SurveyQuestionFragment extends Fragment {
             questionId = getArguments().getInt("Id");
             result = getArguments().getInt("Result");
             question = getArguments().getString("Question");
-
-
         }
     }
 

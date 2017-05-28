@@ -12,6 +12,9 @@ import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -45,42 +48,53 @@ public class Home extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        Button btnAbout = (Button) findViewById(R.id.about_button);
+//        btnAbout.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v){
+//                Intent i = new Intent(Home.this, AboutActivity.class);
+//                startActivity(i);
+//            }
+//        });
+//
+//        Button btnSurvey = (Button) findViewById(R.id.survey_button);
+//        btnSurvey.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v){
+//                Intent i = new Intent(Home.this, Survey.class);
+//                startActivity(i);
+//            }
+//        });
+//
+//        Button btnSurvey2 = (Button) findViewById(R.id.survey_button2);
+//        btnSurvey.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v){
+//                Intent i = new Intent(Home.this, Survey.class);
+//                startActivity(i);
+//            }
+//        });
+//
+//        Button btnReport = (Button) findViewById(R.id.report_button);
+//        btnReport.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v){
+//                Intent i = new Intent(Home.this, Report.class);
+//                startActivity(i);
+//            }
+//        });
+//
+//        Button btnContacts = (Button) findViewById(R.id.contact_button);
+//        btnContacts.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v){
+//                Intent i = new Intent(Home.this, Contacts.class);
+//                startActivity(i);
+//            }
+//        });
 
-        Button btnAbout = (Button) findViewById(R.id.about_button);
-        btnAbout.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent i = new Intent(Home.this, AboutActivity.class);
-                startActivity(i);
-            }
-        });
 
-        Button btnSurvey = (Button) findViewById(R.id.survey_button);
-        btnSurvey.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent i = new Intent(Home.this, Survey.class);
-                startActivity(i);
-            }
-        });
-
-        Button btnReport = (Button) findViewById(R.id.report_button);
-        btnReport.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent i = new Intent(Home.this, Report.class);
-                startActivity(i);
-            }
-        });
-
+        loadPage();
         HandleLogin();
         Intent i = new Intent(this, ListennerService.class);
         startService(i);
@@ -93,9 +107,45 @@ public class Home extends AppCompatActivity {
         return true;
     }
 
-    public void onButtonSelect()
-    {
+    @Override
+    public void onResume() {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        super.onResume();
+        loadPage();
+    }
 
+    @Override
+    public void onRestart() {
+        super.onRestart();
+        loadPage();
+
+    }
+
+    private void loadPage()
+    {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment oldFragment = fragmentManager.findFragmentByTag("content");
+        if(oldFragment != null)
+        {
+            fragmentManager.beginTransaction().remove(oldFragment).commitAllowingStateLoss();
+        }
+
+        settings = getSharedPreferences("MVMR", 0);
+        if(settings.getInt("submittedSurvey", 0) == 0)
+        {
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            HomeNoSurveyFragment fragment = HomeNoSurveyFragment.newInstance();
+            fragmentTransaction.add(R.id.home_container, fragment, "content");
+            fragmentTransaction.commitAllowingStateLoss();
+        }
+
+        else
+        {
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            HomeSurveyFragment fragment = HomeSurveyFragment.newInstance();
+            fragmentTransaction.add(R.id.home_container, fragment, "content");
+            fragmentTransaction.commitAllowingStateLoss();
+        }
     }
 
     @Override
