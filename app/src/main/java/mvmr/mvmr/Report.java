@@ -156,7 +156,7 @@ public class Report extends AppCompatActivity implements DatePickerFragment.OnDa
                         String modelId = java.util.UUID.randomUUID().toString() + new SimpleDateFormat("_HH:mm:ss").format(new Date());
 
                         mDatabase = FirebaseDatabase.getInstance().getReference();
-                        mDatabase.child("survey")
+                        mDatabase.child("report")
                                 .child(modelId)
                                 .setValue(model);
 

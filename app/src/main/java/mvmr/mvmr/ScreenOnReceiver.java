@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.SystemClock;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -25,7 +26,8 @@ public class ScreenOnReceiver extends BroadcastReceiver {
 
                 String id = java.util.UUID.randomUUID().toString();
                 String userId = context.getSharedPreferences("MVMR", 0).getString("user_id", null);
-                String lit = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date());
+                long time = SystemClock.elapsedRealtime();
+                String lit = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(time);
                 SharedPreferences.Editor settingsEditor = context.getSharedPreferences("MVMR", 0).edit();
 
                 settingsEditor.putString("row", id);

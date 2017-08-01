@@ -68,7 +68,7 @@ public class Survey extends AppCompatActivity  implements SurveyQuestionFragment
 
     public void onSubmit(View view) {
         SharedPreferences settings = getSharedPreferences("MVMR", 0);
-        SurveyModel model = new SurveyModel(settings.getString("user_id", null), new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date()));
+        SurveyModel model = new SurveyModel(settings.getString("user_id", null), new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date()), "");
 
         for(int i = 0; i < surveyQuestions.length; i++)
         {

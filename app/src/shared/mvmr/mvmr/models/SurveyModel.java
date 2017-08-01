@@ -9,10 +9,11 @@ public class SurveyModel extends BaseModel{
     public String User;
     public String UserTimeStamp;
 
-    public SurveyModel(String user, String utime)
+    public SurveyModel(String user, String utime, String result)
     {
         super();
         User = user;
         UserTimeStamp = utime;
+        Result = result;
     }
 }

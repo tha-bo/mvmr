@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.SystemClock;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -32,7 +33,8 @@ public class ScreenOffReceiver extends BroadcastReceiver {
 
                 String id = settings.getString("row", null);
                 String userId = context.getSharedPreferences("MVMR", 0).getString("user_id", null);
-                String unlit = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date());
+                long time = SystemClock.elapsedRealtime();
+                String unlit = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(time);
 
                 DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
                 if(id == null)
