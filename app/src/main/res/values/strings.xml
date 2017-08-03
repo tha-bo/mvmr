@@ -37,6 +37,14 @@
         <item>No</item>
         <item>Rather not say</item>
     </string-array>
+    <string-array name="grade_entries">
+        <item>What Grade are you in?</item>
+        <item>Grade 8</item>
+        <item>Grade 9</item>
+        <item>Grade 10</item>
+        <item>Grade 11</item>
+        <item>Grade 12</item>
+    </string-array>
     <string name="report_victim_text">Were you the victim?</string>
     <string name="report_platform_text">What platform did it occur on?</string>
     <string name="survey_instructions">Please respond to each of the questions on the page by selecting one the options. Select the Submit button to send the results</string>
@@ -83,6 +91,18 @@ Please take the survey on the "Mobile Victimisation" page. This is so that we ma
 To report mobile victimisation, please go to the "Report Mobile Victimisation" page. On this page, you may send a message which will be delivered by text to us. Upon receiving your text, we will be able to contact you as soon as possible. If you wish not to be contacted, please refer to the "Contacts and Resources" page for sources which may inform you on how to cope with the mobile victimisation.
     </string>
 
+    <string name="provideDescription">
+Please provide a desciption
+    </string>
+
+    <string name="happennedWhen">
+When did this happen?
+    </string>
+
+    <string name="schoolAttended">
+What is the name of the school you attend?
+    </string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_report">Report</string>
@@ -90,21 +110,17 @@ To report mobile victimisation, please go to the "Report Mobile Victimisation" p
 
     <string-array name="contact_phone">
         <item>SAPS Crime Stop | +27860010111</item>
-        <item>TabuPhone | +270783014518</item>
     </string-array>
 
     <string-array name="contact_web">
-        <item>SAPS | https://en.wikipedia.org/wiki/Example.com</item>
-        <item>TestWeb | https://en.wikipedia.org/wiki/Example.com</item>
+        <!--<item>SAPS | https://en.wikipedia.org/wiki/Example.com</item>-->
     </string-array>
 
     <string-array name="contact_sms">
-        <item>TabuSMS | +270783014518</item>
-        <item>TabuSMS2 | +270783014518</item>
+        <!--<item>TabuSMS | +270783014518</item>-->
     </string-array>
 
     <string-array name="contact_email">
         <item>SAPS | childprotect@saps.org.za</item>
-        <item>TestEmail | mvmrclient@google.com</item>
     </string-array>
 </resources>

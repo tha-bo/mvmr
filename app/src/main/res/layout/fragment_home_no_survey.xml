@@ -72,7 +72,7 @@
                 android:id="@+id/survey_button2"
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="75dp"
                 android:layout_marginTop="20dp"
                 android:text="Survey" />
 

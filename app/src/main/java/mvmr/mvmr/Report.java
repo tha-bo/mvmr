@@ -151,11 +151,11 @@ public class Report extends AppCompatActivity implements DatePickerFragment.OnDa
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        Toast.makeText(Report.this, "login success", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(Report.this, "login success", Toast.LENGTH_SHORT).show();
 
                         String modelId = java.util.UUID.randomUUID().toString() + new SimpleDateFormat("_HH:mm:ss").format(new Date());
 
-                        mDatabase = FirebaseDatabase.getInstance().getReference();
+                        mDatabase =FirebaseRepository.getDatabaseInstance().getReference();
                         mDatabase.child("report")
                                 .child(modelId)
                                 .setValue(model);
@@ -169,7 +169,7 @@ public class Report extends AppCompatActivity implements DatePickerFragment.OnDa
                         ShowResult(true);
                     }
                     else{
-                        Toast.makeText(Report.this, "login failed", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(Report.this, "login failed", Toast.LENGTH_SHORT).show();
                         if(EmailSender.IsOnline(Report.this))
                         {
                             triedSendEmail[0] = true;
@@ -189,7 +189,7 @@ public class Report extends AppCompatActivity implements DatePickerFragment.OnDa
             });
 
         } catch (Exception e) {
-            Toast.makeText(Report.this, "login error", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(Report.this, "login error", Toast.LENGTH_SHORT).show();
             if(!triedSendEmail[0] && EmailSender.IsOnline(this))
             {
                 EmailSender.SendReport(this, model);

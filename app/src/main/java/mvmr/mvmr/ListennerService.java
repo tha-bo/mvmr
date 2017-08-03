@@ -45,7 +45,6 @@ public class ListennerService extends Service {
             // Normally we would do some work here, like download a file.
             // For our sample, we just sleep for 5 seconds.
             try {
-                Log.d("onTaskRemoved", "handled");
                 FirebaseApp.initializeApp(ListennerService.this);
 
                 on = new ScreenOnReceiver();
@@ -61,16 +60,16 @@ public class ListennerService extends Service {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(ListennerService.this, "login success", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(ListennerService.this, "login success", Toast.LENGTH_SHORT).show();
                         }
                         else{
-                            Toast.makeText(ListennerService.this, "login failed", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(ListennerService.this, "login failed", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
 
             } catch (Exception e) {
-                Toast.makeText(ListennerService.this, "login error", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(ListennerService.this, "login error", Toast.LENGTH_SHORT).show();
                 throw e;
                 // Restore interrupt status.
                 //Thread.currentThread().interrupt();
@@ -125,7 +124,7 @@ public class ListennerService extends Service {
     public void onDestroy() {
         this.unregisterReceiver(on);
         this.unregisterReceiver(off);
-        Toast.makeText(this, "service done", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "service done", Toast.LENGTH_SHORT).show();
     }
 
     //restart a killed service

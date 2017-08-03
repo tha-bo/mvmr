@@ -29,7 +29,6 @@ public class AboutActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem menu)
     {
-        Log.d("brrbrbrb", "asdasdasdasdasd");
         switch (menu.getItemId()) {
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);

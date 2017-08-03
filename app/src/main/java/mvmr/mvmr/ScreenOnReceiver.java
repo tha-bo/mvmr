@@ -33,7 +33,7 @@ public class ScreenOnReceiver extends BroadcastReceiver {
                 settingsEditor.putString("row", id);
                 settingsEditor.commit();
 
-                DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                DatabaseReference mDatabase = FirebaseRepository.getDatabaseInstance().getReference();
                 mDatabase.child("usage").child(id).setValue(new UsageModel(userId, lit, null));
 
                 // Must call finish() so the BroadcastReceiver can be recycled.

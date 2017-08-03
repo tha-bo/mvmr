@@ -8,6 +8,8 @@ public class SurveyModel extends BaseModel{
     public String Result;
     public String User;
     public String UserTimeStamp;
+    public String School;
+    public String Grade;
 
     public SurveyModel(String user, String utime, String result)
     {

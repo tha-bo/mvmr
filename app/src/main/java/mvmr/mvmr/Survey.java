@@ -1,5 +1,6 @@
 package mvmr.mvmr;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,8 +14,11 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -56,6 +60,23 @@ public class Survey extends AppCompatActivity  implements SurveyQuestionFragment
             fragmentTransaction.add(R.id.questionsContainer, fragment);
             fragmentTransaction.commit();
         }
+        EditText schoolText = (EditText) findViewById(R.id.school);
+
+        Spinner gradeSpinner = (Spinner) findViewById(R.id.grade);
+        gradeSpinner.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                surveyCache.edit().putInt("grade", (int)(parent).getSelectedItemId()).commit();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        schoolText.setText(surveyCache.getString("school", null));
+        gradeSpinner.setSelection(surveyCache.getInt("grade", 0));
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
@@ -64,11 +85,34 @@ public class Survey extends AppCompatActivity  implements SurveyQuestionFragment
         SharedPreferences.Editor surveyCacheEditor = surveyCache.edit();
         surveyCacheEditor.putInt("question_" + uri, result);
         surveyCacheEditor.commit();
+        HideKeyboad();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences.Editor surveyCacheEditor = surveyCache.edit();
+        EditText schoolText = (EditText) findViewById(R.id.school);
+        if(schoolText.getText() != null)
+            surveyCacheEditor.putString("school", schoolText.getText().toString()).commit();
     }
 
     public void onSubmit(View view) {
         SharedPreferences settings = getSharedPreferences("MVMR", 0);
         SurveyModel model = new SurveyModel(settings.getString("user_id", null), new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date()), "");
+
+        EditText schoolText = (EditText) findViewById(R.id.school);
+
+        Spinner gradeSpinner = (Spinner) findViewById(R.id.grade);
+
+        if(schoolText.getText().toString() == null || gradeSpinner.getSelectedItemId() == 0 || schoolText.getText().toString().equals(""))
+        {
+            Toast.makeText(Survey.this, "Please Enter all values", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        model.School = schoolText.getText().toString();
+        model.Grade = gradeSpinner.getSelectedItem().toString();
 
         for(int i = 0; i < surveyQuestions.length; i++)
         {
@@ -82,6 +126,7 @@ public class Survey extends AppCompatActivity  implements SurveyQuestionFragment
         }
         SharedPreferences.Editor surveyCacheEditor = surveyCache.edit();
         surveyCacheEditor.putString("question_Results", model.Result);
+        surveyCacheEditor.putString("school", schoolText.getText().toString());
         surveyCacheEditor.commit();
         SendResults(model);
     }
@@ -96,11 +141,11 @@ public class Survey extends AppCompatActivity  implements SurveyQuestionFragment
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        Toast.makeText(Survey.this, "login success", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(Survey.this, "login success", Toast.LENGTH_SHORT).show();
 
                         String modelId = java.util.UUID.randomUUID().toString() + new SimpleDateFormat("_HH:mm:ss").format(new Date());
 
-                        mDatabase = FirebaseDatabase.getInstance().getReference();
+                        mDatabase = FirebaseRepository.getDatabaseInstance().getReference();
                         mDatabase.child("survey")
                                 .child(modelId)
                                 .setValue(model);
@@ -114,7 +159,7 @@ public class Survey extends AppCompatActivity  implements SurveyQuestionFragment
                         ShowResult(true);
                     }
                     else{
-                        Toast.makeText(Survey.this, "login failed", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(Survey.this, "login failed", Toast.LENGTH_SHORT).show();
                         if(EmailSender.IsOnline(Survey.this))
                         {
                             triedSendEmail[0] = true;
@@ -133,7 +178,7 @@ public class Survey extends AppCompatActivity  implements SurveyQuestionFragment
             });
 
         } catch (Exception e) {
-            Toast.makeText(Survey.this, "login error", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(Survey.this, "login error", Toast.LENGTH_SHORT).show();
             if(!triedSendEmail[0] && EmailSender.IsOnline(this))
             {
                 EmailSender.SendSurvey(this, model);
@@ -170,5 +215,13 @@ public class Survey extends AppCompatActivity  implements SurveyQuestionFragment
 
         AlertDialog alert11 = builder1.create();
         alert11.show();
+    }
+
+    private void HideKeyboad(){
+        InputMethodManager inputManager = (InputMethodManager)
+                getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        inputManager.hideSoftInputFromWindow((getCurrentFocus() == null) ? null : getCurrentFocus().getWindowToken(),
+                InputMethodManager.HIDE_NOT_ALWAYS);
     }
 }

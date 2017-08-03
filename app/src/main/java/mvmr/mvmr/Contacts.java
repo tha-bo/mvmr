@@ -44,7 +44,6 @@ public class Contacts extends AppCompatActivity {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
             String [] details = contacts[i].split("\\|");
-            Log.e(contacts[i], details.length + " " + details[0] + " " + details[1]);
             ContactFragment fragment = ContactFragment.newInstance(details[0].toUpperCase(), details[1].trim(), type);
             fragmentTransaction.add(R.id.contactsContainer, fragment);
             fragmentTransaction.commit();

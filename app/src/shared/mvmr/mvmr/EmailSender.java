@@ -38,15 +38,17 @@ public class EmailSender {
 
     public static void SendSurvey(Activity context, SurveyModel model)
     {
-        Send(context, "Survey Result", "Survey Result:" + model.Result);
+        Send(context, "Survey Result", "School: " + model.School + " ;" + "\n\n" +
+                "Grade: " + model.Grade + " ;" + "\n\n" +
+                "Survey Result: " + model.Result);
     }
 
     public static void SendReport(Activity context, ReportModel model)
     {
-        Send(context, "Report Result", "Date:" + model.Date + " ," + "\n\n" +
-                "Description:" + model.Description + " ," + "\n\n" +
-                "Platform Occurred:" + model.PlatformOccurred + " ," + "\n\n" +
-                "Is Victim:" + model.IsVictim);
+        Send(context, "Report Result", "Date: " + model.Date + " ;" + "\n\n" +
+                "Description: " + model.Description + " ;" + "\n\n" +
+                "Platform Occurred: " + model.PlatformOccurred + " ;" + "\n\n" +
+                "Is Victim: " + model.IsVictim);
     }
 
     private static void Send(Activity context,String subject, String text)

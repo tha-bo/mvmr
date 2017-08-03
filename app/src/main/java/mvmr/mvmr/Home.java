@@ -195,7 +195,7 @@ public class Home extends AppCompatActivity {
                             settingsEditor.putString("user_id", user_id);
                             settingsEditor.commit();
                             //get phone type and apps here
-                            mDatabase = FirebaseDatabase.getInstance().getReference();
+                            mDatabase = FirebaseRepository.getDatabaseInstance().getReference();
 
                             UserModel user = new UserModel(
                                     Build.MANUFACTURER,
@@ -215,7 +215,7 @@ public class Home extends AppCompatActivity {
                         }
                         return;
                     }
-                    Log.w("asdasdasd", "signInAnonymously:failure", task.getException());
+//                    Log.w("asdasdasd", "signInAnonymously:failure", task.getException());
                 }
             });
         }
@@ -223,7 +223,7 @@ public class Home extends AppCompatActivity {
         catch(Exception e)
         {
             //experience shouldnt end;
-            Toast.makeText(this, "login error", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "login error", Toast.LENGTH_SHORT).show();
         }
     }
 }
