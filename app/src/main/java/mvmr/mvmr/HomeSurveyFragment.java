@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import android.widget.Button;
 public class HomeSurveyFragment extends Fragment {
 
     private Context _context;
+    //private ImagePagerAdapter imageAdapter;
 
     public HomeSurveyFragment() {
         // Required empty public constructor
@@ -39,7 +41,6 @@ public class HomeSurveyFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -88,6 +89,11 @@ public class HomeSurveyFragment extends Fragment {
                 startActivity(i);
             }
         });
+
+//        imageAdapter = new ImagePagerAdapter(_context);
+//
+//        ViewPager viewPager = (ViewPager) view.findViewById(R.id.pager);
+//        viewPager.setAdapter(imageAdapter);
     }
 
     @Override

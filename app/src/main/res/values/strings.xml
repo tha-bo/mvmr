@@ -123,4 +123,9 @@ What is the name of the school you attend?
     <string-array name="contact_email">
         <item>SAPS | childprotect@saps.org.za</item>
     </string-array>
+
+    <string-array name="homePageImages">
+        <item>name</item>
+        <item>name</item>
+    </string-array>
 </resources>
