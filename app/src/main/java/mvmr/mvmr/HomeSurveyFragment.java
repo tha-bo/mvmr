@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -23,7 +24,10 @@ import android.widget.Button;
 public class HomeSurveyFragment extends Fragment {
 
     private Context _context;
-    //private ImagePagerAdapter imageAdapter;
+    private ImagePagerAdapter imageAdapter;
+    private ImageViewPager viewPager;
+    Runnable _autoscrollTimer;
+    final Handler _autoscrollHandler = new Handler();
 
     public HomeSurveyFragment() {
         // Required empty public constructor
@@ -90,10 +94,10 @@ public class HomeSurveyFragment extends Fragment {
             }
         });
 
-//        imageAdapter = new ImagePagerAdapter(_context);
-//
-//        ViewPager viewPager = (ViewPager) view.findViewById(R.id.pager);
-//        viewPager.setAdapter(imageAdapter);
+        imageAdapter = new ImagePagerAdapter(_context);
+        viewPager = (ImageViewPager) view.findViewById(R.id.pager);
+        viewPager.setAdapter(imageAdapter);
+        SetUpAutoScroll(viewPager);
     }
 
     @Override
@@ -105,5 +109,31 @@ public class HomeSurveyFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    private void SetUpAutoScroll(final ImageViewPager viewPager)
+    {
+        final int count = imageAdapter.getCount();
+
+        Runnable _autoscrollTimer = new Runnable() {
+
+            @Override
+            public void run() {
+                int newIndex = 0;
+                if(viewPager.getCurrentItem() + 1 < count ){
+                    newIndex = viewPager.getCurrentItem() + 1;
+                }
+                viewPager.setCurrentItem(newIndex);
+                _autoscrollHandler.postDelayed(this, 6*1000);
+
+            }
+        };
+        _autoscrollHandler.post(_autoscrollTimer);
+    }
+
+    @Override
+    public void onDestroy() {
+        _autoscrollHandler.removeCallbacks(_autoscrollTimer);
+        super.onDestroy();
     }
 }

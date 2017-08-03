@@ -7,15 +7,15 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp">
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp">
 
-        <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+        <mvmr.mvmr.ImageViewPager xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true">
-        </android.support.v4.view.ViewPager>
+        </mvmr.mvmr.ImageViewPager>
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -23,7 +23,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true">
+        android:layout_below="@+id/pager">
 
         <Button
             android:id="@+id/contact_button"
@@ -50,11 +50,13 @@
 
         <Button
             android:id="@+id/report_button"
-            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/survey_button"
-            android:text="Report" />
+            android:background="@drawable/ic_like"
+            android:backgroundTint="@color/colorAccentLight"
+
+            style="?android:attr/borderlessButtonStyle" />
     </RelativeLayout>
 
 

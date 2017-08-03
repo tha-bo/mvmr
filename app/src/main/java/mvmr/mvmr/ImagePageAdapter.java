@@ -1,4 +1,4 @@
-/*
+
 package mvmr.mvmr;
 
 import android.content.Context;
@@ -9,10 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-*/
+
 /**
  * Created by PeerlessGate on 8/3/2017.
- *//*
+ */
 
 
 class ImagePagerAdapter extends PagerAdapter {
@@ -24,7 +24,7 @@ class ImagePagerAdapter extends PagerAdapter {
     public ImagePagerAdapter(Context context) {
         mContext = context;
         mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        images = new int []{0, 1};
+        images = new int []{R.drawable.img_phone, R.drawable.img_bully, R.drawable.img_people};
     }
 
     @Override
@@ -54,4 +54,4 @@ class ImagePagerAdapter extends PagerAdapter {
         container.removeView((LinearLayout) object);
     }
 }
-*/
+
