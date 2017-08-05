@@ -7,11 +7,11 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="mvmr.mvmr.Report"
     tools:showIn="@layout/activity_report"
-    android:background="@color/white">
+    android:background="@drawable/img_generic">
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
@@ -28,6 +28,9 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!-- Dummy item to prevent AutoCompleteTextView from receiving focus -->
+
+
             <EditText
                 android:id="@+id/report_date"
                 android:layout_width="match_parent"
@@ -37,8 +40,19 @@
                 android:hint="@string/happennedWhen"
                 android:inputType="none"
                 android:longClickable="false"
-                android:paddingTop="30dp"
-                android:scrollHorizontally="false" />
+                android:background="@drawable/layout_rounded"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:scrollHorizontally="false"
+                />
+
+            <LinearLayout
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:layout_width="0px"
+                android:layout_height="0px"/>
 
             <EditText
                 android:id="@+id/report_description"
@@ -47,8 +61,15 @@
                 android:layout_marginTop="30dp"
                 android:ems="10"
                 android:hint="@string/provideDescription"
+                android:background="@drawable/layout_rounded"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 android:inputType="textMultiLine"
-                android:scrollHorizontally="false" />
+                android:scrollHorizontally="false"
+                android:nextFocusUp="@id/report_description"
+                android:nextFocusLeft="@id/report_description"/>
 
             <Spinner
                 android:id="@+id/report_platform"
@@ -58,7 +79,12 @@
                 android:entries="@array/report_platform_entries"
                 android:inputType="textMultiLine"
                 android:spinnerMode="dialog"
-                android:visibility="visible" />
+                android:visibility="visible"
+                android:background="@drawable/layout_rounded"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"/>
 
             <Spinner
                 android:id="@+id/report_victim"
@@ -66,7 +92,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:entries="@array/report_victim_entries"
-                android:spinnerMode="dialog" />
+                android:spinnerMode="dialog"
+                android:background="@drawable/layout_rounded"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"/>
 
             <Button
                 android:id="@+id/report_submit"

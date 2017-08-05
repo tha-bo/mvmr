@@ -2,6 +2,7 @@ package mvmr.mvmr;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import static mvmr.mvmr.ContactEnum.*;
 
 
 /**
@@ -54,7 +57,7 @@ public class ContactFragment extends Fragment {
         if (getArguments() != null) {
             contactName = getArguments().getString("ContactName");
             contactNumber = getArguments().getString("ContactNumber");
-            contactType = ContactEnum.values()[getArguments().getInt("ContactType")];
+            contactType = values()[getArguments().getInt("ContactType")];
         }
     }
 
@@ -67,31 +70,53 @@ public class ContactFragment extends Fragment {
 
         Button btn = (Button) view.findViewById(R.id.btn_contact);
         btn.setText(contactNumber);
+        Drawable img = null;
+
+        switch (contactType){
+            case Mobile:{
+                img = getContext().getResources().getDrawable( R.drawable.ic_phone );
+                break;
+            }
+            case Sms:{
+                img = getContext().getResources().getDrawable( R.drawable.ic_sms );
+                break;
+            }
+            case Email:{
+                img = getContext().getResources().getDrawable( R.drawable.ic_email );
+                break;
+            }
+            default:{
+                img = getContext().getResources().getDrawable( R.drawable.ic_globe );
+            }
+        }
+
+        img.setBounds( 0, 0, 32, 32 );
+        btn.setCompoundDrawables( img, null, null, null );
 
         btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 Intent intent = null;
 
-                if(contactType == ContactEnum.Sms)
+                if(contactType == Sms)
                 {
                     intent = new Intent(Intent.ACTION_VIEW);
                     intent.setData(Uri.parse("sms:" + contactNumber));
                 }
 
-                else if(contactType == ContactEnum.Mobile)
+                else if(contactType == Mobile)
                 {
                     intent = new Intent(Intent.ACTION_DIAL);
                     intent.setData(Uri.parse("tel:" + contactNumber));
                 }
 
-                else if(contactType == ContactEnum.Web)
+                else if(contactType == Web)
                 {
                     Uri webpage = Uri.parse(contactNumber);
                     intent = new Intent(Intent.ACTION_VIEW, webpage);
                 }
 
-                else if(contactType == ContactEnum.Email)
+                else if(contactType == Email)
                 {
                     intent = new Intent(Intent.ACTION_SENDTO);
                     intent.setData(Uri.parse("mailto:")); // only email apps should handle this

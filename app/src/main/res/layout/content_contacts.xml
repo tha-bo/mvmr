@@ -7,7 +7,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="mvmr.mvmr.Contacts"
     tools:showIn="@layout/activity_contacts"
-    android:background="@color/white">
+    android:background="@drawable/img_generic">
 
     <ScrollView
         android:layout_width="match_parent"

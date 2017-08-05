@@ -113,7 +113,12 @@ What is the name of the school you attend?
     </string-array>
 
     <string-array name="contact_web">
-        <!--<item>SAPS | https://en.wikipedia.org/wiki/Example.com</item>-->
+        <item>webroot | https://www.webroot.com/au/en/home/resources/tips/cyberbullying-online-predators/safety-how-do-i-report-cyberbullying-to-police-or-law-enforcement</item>
+        <item>nobullying | https://nobullying.com/cyber-bullying-in-south-africa-an-issue-worthy-to-know/</item>
+        <item>cyberbullying | http://www.cyberbullying.org.za/south-african-law.html</item>
+        <item>cyberbullying | https://cybercrime.org.za/cyberbullying/</item>
+        <item>Contacts | https://cybercrime.org.za/contact/</item>
+        <item>Reporting | https://cybercrime.org.za/reporting</item>
     </string-array>
 
     <string-array name="contact_sms">

@@ -7,7 +7,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="mvmr.mvmr.AboutActivity"
     tools:showIn="@layout/activity_about"
-    android:background="@color/white">
+    android:background="@drawable/img_generic">
 
 
     <ScrollView
@@ -39,6 +39,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginBottom="8dp"
                 android:text="What is Mobile Bullying?"
+                android:textColor="@color/white"
                 android:textStyle="bold" />
 
             <TextView
@@ -46,6 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/header_about1"
+                android:textColor="@color/white"
                 android:text="@string/about1" />
 
             <TextView
@@ -55,6 +57,7 @@
                 android:layout_below="@+id/text_about1"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="20dp"
+                android:textColor="@color/white"
                 android:text="What is Mobile Victimisation"
                 android:textStyle="bold" />
 
@@ -63,6 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/header_about2"
+                android:textColor="@color/white"
                 android:text="@string/about2" />
 
             <TextView
@@ -72,6 +76,7 @@
                 android:layout_below="@+id/text_about2"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="20dp"
+                android:textColor="@color/white"
                 android:text="Consequences of Mobile Victimisation"
                 android:textStyle="bold" />
 
@@ -80,6 +85,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/header_about3"
+                android:textColor="@color/white"
                 android:text="@string/about3" />
 
             <TextView
@@ -90,6 +96,7 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="20dp"
                 android:text="Mission of MVMR"
+                android:textColor="@color/white"
                 android:textStyle="bold" />
 
             <TextView
@@ -97,6 +104,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/header_about4"
+                android:textColor="@color/white"
                 android:text="@string/about4" />
 
             <TextView
@@ -107,6 +115,7 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="20dp"
                 android:text="Vision"
+                android:textColor="@color/white"
                 android:textStyle="bold" />
 
             <TextView
@@ -115,6 +124,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/header_about5"
                 android:text="@string/about5"
+                android:textColor="@color/white"
                 android:paddingBottom="24dp"/>
 
         </RelativeLayout>

@@ -18,45 +18,57 @@
         </mvmr.mvmr.ImageViewPager>
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/pager">
 
-        <Button
-            android:id="@+id/contact_button"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Contact" />
+        <TextView
+            android:id="@+id/home_pin"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_centerHorizontal="true"
+            android:text="" />
 
         <Button
-            android:id="@+id/about_button"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/contact_button"
-            android:text="About" />
-
-        <Button
+            android:layout_marginTop="32dp"
             android:id="@+id/survey_button"
             style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/about_button"
-            android:text="Survey" />
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_toLeftOf="@id/home_pin"
+            android:background="@drawable/ic_survey" />
 
         <Button
+            android:layout_marginTop="32dp"
             android:id="@+id/report_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/survey_button"
-            android:background="@drawable/ic_like"
-            android:backgroundTint="@color/colorAccentLight"
-
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_toRightOf="@id/home_pin"
+            android:background="@drawable/ic_report"
             style="?android:attr/borderlessButtonStyle" />
+
+        <Button
+            android:layout_marginTop="32dp"
+            android:id="@+id/contact_button"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:gravity="center_horizontal"
+            android:layout_toLeftOf="@id/home_pin"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_below="@+id/survey_button"
+            android:background="@drawable/ic_contacts" />
+
+        <Button
+            android:layout_marginTop="32dp"
+            android:id="@+id/about_button"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_toRightOf="@id/home_pin"
+            android:layout_below="@+id/report_button"
+            android:background="@drawable/ic_about" />
     </RelativeLayout>
 
 
