@@ -119,6 +119,7 @@ What is the name of the school you attend?
         <item>cyberbullying | https://cybercrime.org.za/cyberbullying/</item>
         <item>Contacts | https://cybercrime.org.za/contact/</item>
         <item>Reporting | https://cybercrime.org.za/reporting</item>
+        <item>MVMR Icon Source | https://icons8.com/icon/new-icons/all</item>
     </string-array>
 
     <string-array name="contact_sms">
@@ -133,4 +134,5 @@ What is the name of the school you attend?
         <item>name</item>
         <item>name</item>
     </string-array>
+    <string name="informSchool">Still keeping your anonymity, do you wish for us to inform your school of this event?</string>
 </resources>

@@ -33,7 +33,7 @@ import javax.activation.DataHandler;
 public class EmailSender {
 
     private static final String username = "mvmrClient@gmail.com";
-    private static final String password = "mvmrPass123";
+    private static final String password = "mvrPassQ3214x";
 
 
     public static void SendSurvey(Activity context, SurveyModel model)
@@ -48,7 +48,8 @@ public class EmailSender {
         Send(context, "Report Result", "Date: " + model.Date + " ;" + "\n\n" +
                 "Description: " + model.Description + " ;" + "\n\n" +
                 "Platform Occurred: " + model.PlatformOccurred + " ;" + "\n\n" +
-                "Is Victim: " + model.IsVictim);
+                "Is Victim: " + model.IsVictim + " ;" + "\n\n" +
+                "Inform School: " + model.InformSchool);
     }
 
     private static void Send(Activity context,String subject, String text)

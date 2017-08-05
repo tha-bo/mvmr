@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -122,6 +123,7 @@ public class Report extends AppCompatActivity implements DatePickerFragment.OnDa
         EditText r_description = (EditText) findViewById(R.id.report_description);
         Spinner r_platform = (Spinner) findViewById(R.id.report_platform);
         Spinner r_victim = (Spinner) findViewById(R.id.report_victim);
+        CheckBox r_inform = (CheckBox) findViewById(R.id.inform_school);
 
         if(r_date.getText().toString() == null || r_date.getText().toString().equals("") ||
            r_description.getText().toString() == null || r_description.getText().toString().equals("") ||
@@ -136,7 +138,8 @@ public class Report extends AppCompatActivity implements DatePickerFragment.OnDa
                 new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date()),
                 r_description.getText().toString(),
                 r_platform.getSelectedItem().toString(),
-                r_victim.getSelectedItem().toString()
+                r_victim.getSelectedItem().toString(),
+                r_inform.isChecked()
         );
         SendResults(model);
     }
