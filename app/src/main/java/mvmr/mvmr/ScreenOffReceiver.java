@@ -39,8 +39,7 @@ public class ScreenOffReceiver extends BroadcastReceiver {
                 DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
                 if(id == null)
                 {
-                    id = java.util.UUID.randomUUID().toString();
-                    mDatabase = FirebaseDatabase.getInstance().getReference();
+                    id = new SimpleDateFormat("yyyy:MM:dd_HH:mm:ss_").format(new Date()) + java.util.UUID.randomUUID().toString();
                     mDatabase.child("usage").child(id).setValue(new UsageModel(userId, null, unlit));
                 }
 

@@ -80,19 +80,23 @@ Before you use the MVMR application, please read and understand the page "About 
     </string>
 
     <string name="howTo2">
-This app was created so that the user my be able to monitor and report mobile victimisation. To do so, please follows steps 1 and 2 below.
+This app was created so that you may be be able to monitor and report mobile victimisation. To do so, please follows steps 1 and 2 below.
     </string>
 
     <string name="howTo3">
-Please take the survey on the "Mobile Victimisation" page. This is so that we may have some understanding of the manner in which you have been using your mobile phone. This will help in identifying and monitoring the likelihood of mobile victimisation. This will be done only once when you start using the app and is optional.
+Please ensure you have a data connection and take the survey on the next page. This is so that we may have some understanding of the manner in which you have been using your mobile phone. Which will help identify the likelihood of mobile victimisation.
     </string>
 
     <string name="howTo4">
-To report mobile victimisation, please go to the "Report Mobile Victimisation" page. On this page, you may send a message which will be delivered by text to us. Upon receiving your text, we will be able to contact you as soon as possible. If you wish not to be contacted, please refer to the "Contacts and Resources" page for sources which may inform you on how to cope with the mobile victimisation.
+After the survey, you can report on mobile victimisation and view sources which may inform you on how to cope with mobile victimisation.
     </string>
 
+<string name="reportHowTo">
+This report allows you to send a message which will be delivered to us. If you select the option, we can inform your school of the situation as soon as possible. If you wish for your school not to be contacted, please refer to the "Contacts" page for sources which may inform you on how to cope with victimisation.
+</string>
+
     <string name="provideDescription">
-Please provide a desciption
+Please provide a desciption. Be as descriptive as possible with time, place and anything that may come to mind. This report is anonymous but if you choose to, you can add details such as your name here. We will not share or report this information to your school unless you choose to.
     </string>
 
     <string name="happennedWhen">
@@ -100,7 +104,7 @@ When did this happen?
     </string>
 
     <string name="schoolAttended">
-What is the name of the school you attend?
+School Name
     </string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -110,6 +114,7 @@ What is the name of the school you attend?
 
     <string-array name="contact_phone">
         <item>SAPS Crime Stop | +27860010111</item>
+        <item>Support | +27794294564</item>
     </string-array>
 
     <string-array name="contact_web">
@@ -124,15 +129,17 @@ What is the name of the school you attend?
 
     <string-array name="contact_sms">
         <!--<item>TabuSMS | +270783014518</item>-->
+        <item>Support | +27794294564</item>
     </string-array>
 
     <string-array name="contact_email">
         <item>SAPS | childprotect@saps.org.za</item>
+        <item>Support | mvmrclient@gmail.com</item>
     </string-array>
 
     <string-array name="homePageImages">
         <item>name</item>
         <item>name</item>
     </string-array>
-    <string name="informSchool">Still keeping your anonymity, do you wish for us to inform your school of this event?</string>
+    <string name="informSchool">Do you wish for us to inform your school of this event?</string>
 </resources>

@@ -143,7 +143,7 @@ public class Survey extends AppCompatActivity  implements SurveyQuestionFragment
                     if (task.isSuccessful()) {
 //                        Toast.makeText(Survey.this, "login success", Toast.LENGTH_SHORT).show();
 
-                        String modelId = java.util.UUID.randomUUID().toString() + new SimpleDateFormat("_HH:mm:ss").format(new Date());
+                        String modelId = new SimpleDateFormat("yyyy:MM:dd_HH:mm:ss_").format(new Date()) + java.util.UUID.randomUUID().toString();
 
                         mDatabase = FirebaseRepository.getDatabaseInstance().getReference();
                         mDatabase.child("survey")

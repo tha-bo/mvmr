@@ -3,6 +3,7 @@ package mvmr.mvmr;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -84,6 +85,19 @@ public class HomeSurveyFragment extends Fragment {
                 startActivity(i);
             }
         });
+
+        Drawable img = getContext().getResources().getDrawable( R.drawable.ic_report );;
+        img.setBounds( 0, 0, 96, 96 );
+        btnReport.setCompoundDrawables( img, null, null, null );
+
+
+        img = getContext().getResources().getDrawable( R.drawable.ic_about );;
+        img.setBounds( 0, 0, 96, 96 );
+        btnAbout.setCompoundDrawables( img, null, null, null );
+
+        img = getContext().getResources().getDrawable( R.drawable.ic_contacts );;
+        img.setBounds( 0, 0, 96, 96 );
+        btnContacts.setCompoundDrawables( img, null, null, null );
 
         imageAdapter = new ImagePagerAdapter(_context);
         viewPager = (ImageViewPager) view.findViewById(R.id.pager);

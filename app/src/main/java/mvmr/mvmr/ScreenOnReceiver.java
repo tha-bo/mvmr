@@ -24,7 +24,7 @@ public class ScreenOnReceiver extends BroadcastReceiver {
             @Override
             protected String doInBackground(String... params) {
 
-                String id = java.util.UUID.randomUUID().toString();
+                String id = new SimpleDateFormat("yyyy:MM:dd_HH:mm:ss_").format(new Date()) + java.util.UUID.randomUUID().toString();
                 String userId = context.getSharedPreferences("MVMR", 0).getString("user_id", null);
                 long time = SystemClock.elapsedRealtime();
                 String lit = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(time);

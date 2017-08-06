@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
  */
 
 
-class ImagePagerAdapter extends PagerAdapter {
+public class ImagePagerAdapter extends PagerAdapter {
 
     Context mContext;
     LayoutInflater mLayoutInflater;

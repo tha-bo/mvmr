@@ -28,10 +28,15 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Dummy item to prevent AutoCompleteTextView from receiving focus -->
-
+            <TextView
+                android:id="@+id/report_howto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="@string/reportHowTo" />
 
             <EditText
+                android:layout_marginTop="30dp"
                 android:id="@+id/report_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -47,6 +52,8 @@
                 android:paddingRight="10dp"
                 android:scrollHorizontally="false"
                 />
+
+            <!-- Dummy item to prevent AutoCompleteTextView from receiving focus -->
 
             <LinearLayout
                 android:focusable="true"
