@@ -189,7 +189,7 @@ public class Home extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         String user_id = Home.this.settings.getString("user_id", null);
-                        if (user_id == null) {
+                        if (user_id == null || user_id == "") {
                             user_id = new SimpleDateFormat("yyyy:MM:dd_HH:mm:ss_").format(new Date()) + java.util.UUID.randomUUID().toString();
                             SharedPreferences.Editor settingsEditor = settings.edit();
                             settingsEditor.putString("user_id", user_id);

@@ -124,6 +124,7 @@ public class ListennerService extends Service {
     public void onDestroy() {
         this.unregisterReceiver(on);
         this.unregisterReceiver(off);
+        stopSelf();
 //        Toast.makeText(this, "service done", Toast.LENGTH_SHORT).show();
     }
 
