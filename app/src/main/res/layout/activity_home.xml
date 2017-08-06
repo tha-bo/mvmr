@@ -7,6 +7,9 @@
     android:background="@color/white"
     tools:context="mvmr.mvmr.Home">
 
-    <include layout="@layout/content_home" />
+    <include
+        layout="@layout/content_home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </android.support.design.widget.CoordinatorLayout>

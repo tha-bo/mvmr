@@ -67,15 +67,6 @@ public class HomeSurveyFragment extends Fragment {
             }
         });
 
-        Button btnSurvey = (Button) view.findViewById(R.id.survey_button);
-        btnSurvey.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent i = new Intent(_context, Survey.class);
-                startActivity(i);
-            }
-        });
-
         Button btnReport = (Button) view.findViewById(R.id.report_button);
         btnReport.setOnClickListener(new View.OnClickListener(){
             @Override

@@ -18,57 +18,64 @@
         </mvmr.mvmr.ImageViewPager>
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_below="@+id/pager">
 
-        <TextView
-            android:id="@+id/home_pin"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:layout_centerHorizontal="true"
-            android:text="" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        <Button
-            android:layout_marginTop="32dp"
-            android:id="@+id/survey_button"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:layout_toLeftOf="@id/home_pin"
-            android:background="@drawable/ic_survey" />
 
-        <Button
-            android:layout_marginTop="32dp"
-            android:id="@+id/report_button"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:layout_toRightOf="@id/home_pin"
-            android:background="@drawable/ic_report"
-            style="?android:attr/borderlessButtonStyle" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/report_button"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    android:background="@drawable/ic_report"
+                    style="?android:attr/borderlessButtonStyle" />
+            </LinearLayout>
 
-        <Button
-            android:layout_marginTop="32dp"
-            android:id="@+id/contact_button"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:gravity="center_horizontal"
-            android:layout_toLeftOf="@id/home_pin"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:layout_below="@+id/survey_button"
-            android:background="@drawable/ic_contacts" />
 
-        <Button
-            android:layout_marginTop="32dp"
-            android:id="@+id/about_button"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:layout_toRightOf="@id/home_pin"
-            android:layout_below="@+id/report_button"
-            android:background="@drawable/ic_about" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/contact_button"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    android:background="@drawable/ic_contacts" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/about_button"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    android:background="@drawable/ic_about" />
+            </LinearLayout>
+
+        </LinearLayout>
     </RelativeLayout>
 
 
