@@ -5,11 +5,11 @@ package mvmr.mvmr.models;
  */
 
 public class TimeStamp extends BaseModel {
-    public String UserTimeStamp;
+    public String TimeStamp;
 
     public TimeStamp(String us)
     {
         super();
-        UserTimeStamp = us;
+        TimeStamp = us;
     }
 }

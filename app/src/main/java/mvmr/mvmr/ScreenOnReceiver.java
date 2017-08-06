@@ -13,6 +13,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import mvmr.mvmr.models.UsageItem;
 import mvmr.mvmr.models.UsageModel;
 import mvmr.mvmr.models.UserModel;
 
@@ -27,19 +28,19 @@ public class ScreenOnReceiver extends BroadcastReceiver {
             @Override
             protected String doInBackground(String... params) {
 
-                String id = new SimpleDateFormat("yyyy:MM:dd_HH:mm:ss_").format(new Date()) + java.util.UUID.randomUUID().toString();
+                String id = new SimpleDateFormat("yyyy:MM:dd_HH:mm:ss").format(new Date());
                 DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
                 String userId = GetUser(context.getSharedPreferences("MVMR", 0), context, mDatabase);
                 long time = SystemClock.elapsedRealtime();
-                String lit = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(time);
+                String lit = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date());
                 SharedPreferences.Editor settingsEditor = context.getSharedPreferences("MVMR", 0).edit();
 
                 settingsEditor.putString("row", id);
                 settingsEditor.commit();
 
 
-                mDatabase.child("usage").child(id).setValue(new UsageModel(userId, lit, null));
+                mDatabase.child("usage").child(userId).child(id).setValue(new UsageItem(lit, time, null, 0));
 
                 // Must call finish() so the BroadcastReceiver can be recycled.
                 pendingResult.finish();

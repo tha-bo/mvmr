@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import mvmr.mvmr.models.TimeStamp;
+import mvmr.mvmr.models.UsageItem;
 import mvmr.mvmr.models.UsageModel;
 import mvmr.mvmr.models.UserModel;
 
@@ -38,18 +39,19 @@ public class ScreenOffReceiver extends BroadcastReceiver {
                 String id = settings.getString("row", null);
                 String userId = GetUser(settings, context, mDatabase);
                 long time = SystemClock.elapsedRealtime();
-                String unlit = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(time);
+                String unlit = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date());
 
 
                 if(id == null)
                 {
-                    id = new SimpleDateFormat("yyyy:MM:dd_HH:mm:ss_").format(new Date()) + java.util.UUID.randomUUID().toString();
-                    mDatabase.child("usage").child(id).setValue(new UsageModel(userId, null, unlit));
+                    id = new SimpleDateFormat("yyyy:MM:dd_HH:mm:ss").format(new Date());
+                    mDatabase.child("usage").child(userId).child(id).setValue(new UsageItem(null,0, unlit, time));
                 }
 
                 else
                 {
-                    mDatabase.child("usage").child(id).child("Unlit").setValue(new TimeStamp(unlit));
+                    mDatabase.child("usage").child(userId).child(id).child("Unlit").setValue(unlit);
+                    mDatabase.child("usage").child(userId).child(id).child("UnLitStamp").setValue(time);
                 }
                 // Must call finish() so the BroadcastReceiver can be recycled.
                 pendingResult.finish();
