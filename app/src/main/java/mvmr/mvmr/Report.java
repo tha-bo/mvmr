@@ -1,7 +1,11 @@
 package mvmr.mvmr;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -18,16 +22,25 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -39,6 +52,8 @@ public class Report extends AppCompatActivity implements DatePickerFragment.OnDa
     protected FirebaseAuth mAuth;
     protected DatabaseReference mDatabase;
     SharedPreferences reportCache;
+    final int galleryRequestCode = 1;
+    Uri _imageUri = null;
 
     Calendar incidentDate = Calendar.getInstance();
     @Override
@@ -95,6 +110,16 @@ public class Report extends AppCompatActivity implements DatePickerFragment.OnDa
             }
         });
 
+        ImageButton btnImage = (ImageButton) findViewById(R.id.report_image);
+        btnImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK,                                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                photoPickerIntent.setType("image/*");
+                startActivityForResult(photoPickerIntent, galleryRequestCode);
+            }
+        });
+
         r_date.setText(reportCache.getString("date", null));
         r_description.setText(reportCache.getString("description", null));
         r_platform.setSelection(reportCache.getInt("platform", 0));
@@ -110,6 +135,30 @@ public class Report extends AppCompatActivity implements DatePickerFragment.OnDa
         String date = new SimpleDateFormat("EEEE d MMM, yyyy").format(incidentDate.getTime());
         r_date.setText(date);
         reportCache.edit().putString("date", date).commit();
+    }
+
+    @Override
+    protected void onActivityResult(int reqCode, int resultCode, Intent data) {
+        super.onActivityResult(reqCode, resultCode, data);
+
+        if(reqCode == galleryRequestCode)
+        {
+            if (resultCode == RESULT_OK) {
+                try {
+                    _imageUri = data.getData();
+                    final InputStream imageStream = getContentResolver().openInputStream(_imageUri);
+                    ImageButton btnImage = (ImageButton) findViewById(R.id.report_image);
+                    Bitmap bitmap= BitmapFactory.decodeStream(imageStream );
+                    btnImage.setImageBitmap(bitmap);
+                } catch (FileNotFoundException e) {
+                    Toast.makeText(Report.this, "We could not save this image", Toast.LENGTH_LONG).show();
+                }
+
+            }else {
+                Toast.makeText(Report.this, "You haven't picked Image",Toast.LENGTH_LONG).show();
+            }
+        }
+
     }
 
     public void showDatePickerDialog(View v) {
@@ -144,6 +193,26 @@ public class Report extends AppCompatActivity implements DatePickerFragment.OnDa
         SendResults(model);
     }
 
+    private void UploadImage(String reportId)
+    {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+        StorageReference riversRef = storageRef.child("images/"+reportId);
+        UploadTask uploadTask = riversRef.putFile(_imageUri);
+
+// Register observers to listen for when the download is done or if it fails
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                Toast.makeText(Report.this, "MVMR failed to upload the report image file. Please try again", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+            }
+        });
+    }
+
     private void SendResults(final ReportModel model)
     {
         final boolean[] triedSendEmail = {false};
@@ -157,6 +226,12 @@ public class Report extends AppCompatActivity implements DatePickerFragment.OnDa
 //                        Toast.makeText(Report.this, "login success", Toast.LENGTH_SHORT).show();
 
                         String modelId = new SimpleDateFormat("yyyy:MM:dd_HH:mm:ss_").format(new Date()) + java.util.UUID.randomUUID().toString();
+
+                        if(_imageUri != null)
+                        {
+                            UploadImage(modelId);
+                            model.HasImage = true;
+                        }
 
                         mDatabase =FirebaseRepository.getDatabaseInstance().getReference();
                         mDatabase.child("report")

@@ -78,11 +78,25 @@
                 android:nextFocusUp="@id/report_description"
                 android:nextFocusLeft="@id/report_description"/>
 
+
+
+            <ImageButton
+                android:layout_marginTop="15dp"
+                android:id="@+id/report_image"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="150sp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside"
+                android:hint="ScreenShot (Not required)"
+                app:srcCompat="@drawable/ic_image" />
+
             <Spinner
                 android:id="@+id/report_platform"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:entries="@array/report_platform_entries"
                 android:inputType="textMultiLine"
                 android:spinnerMode="dialog"

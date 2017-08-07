@@ -13,6 +13,7 @@ public class ReportModel extends BaseModel{
     public String IsVictim;
     public String User;
     public boolean InformSchool;
+    public boolean HasImage;
 
     public ReportModel(String user, String date, String description, String platformOccurred, String isVictim, boolean inform)
     {
@@ -23,5 +24,6 @@ public class ReportModel extends BaseModel{
         IsVictim = isVictim;
         User = user;
         InformSchool = inform;
+        HasImage = false;
     }
 }

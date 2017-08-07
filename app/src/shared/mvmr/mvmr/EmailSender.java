@@ -49,6 +49,7 @@ public class EmailSender {
                 "Description: " + model.Description + " ;" + "\n\n" +
                 "Platform Occurred: " + model.PlatformOccurred + " ;" + "\n\n" +
                 "Is Victim: " + model.IsVictim + " ;" + "\n\n" +
+                "Has Image: " + model.HasImage + " ;" + "\n\n" +
                 "Inform School: " + model.InformSchool);
     }
 
