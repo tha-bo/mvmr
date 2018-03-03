@@ -215,15 +215,16 @@ public class Home extends AppCompatActivity {
                         }
                         return;
                     }
-//                    Log.w("asdasdasd", "signInAnonymously:failure", task.getException());
+                    Log.w("asdasdasd", "signInAnonymously:failure", task.getException());
                 }
             });
+            Toast.makeText(this, "login success", Toast.LENGTH_SHORT).show();
         }
 
         catch(Exception e)
         {
             //experience shouldnt end;
-//            Toast.makeText(this, "login error", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "login error", Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -132,6 +132,33 @@
                 android:paddingRight="10dp"
                 android:layout_marginTop="30dp"/>
 
+            <TextView
+                android:layout_marginTop="20dp"
+                android:id="@+id/report_contactDetailsMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:paddingTop="10dp"
+                android:text="@string/contact_DetailsText" />
+
+            <EditText
+                android:layout_marginTop="5dp"
+                android:id="@+id/report_contactDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:focusable="false"
+                android:hint="@string/contactDetailsHint"
+                android:inputType="none"
+                android:longClickable="false"
+                android:background="@drawable/layout_rounded"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:scrollHorizontally="false"
+                />
+
             <Button
                 android:id="@+id/report_submit"
                 style="@style/Widget.AppCompat.Button.Colored"

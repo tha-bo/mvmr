@@ -10,6 +10,7 @@ public class SurveyModel extends BaseModel{
     public String UserTimeStamp;
     public String School;
     public String Grade;
+    public String CandidateId;
 
     public SurveyModel(String user, String utime, String result)
     {

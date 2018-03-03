@@ -61,6 +61,7 @@ public class Survey extends AppCompatActivity  implements SurveyQuestionFragment
             fragmentTransaction.commit();
         }
         EditText schoolText = (EditText) findViewById(R.id.school);
+        EditText candidateText = (EditText) findViewById(R.id.candidateId);
 
         Spinner gradeSpinner = (Spinner) findViewById(R.id.grade);
         gradeSpinner.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
@@ -75,6 +76,7 @@ public class Survey extends AppCompatActivity  implements SurveyQuestionFragment
             }
         });
         schoolText.setText(surveyCache.getString("school", null));
+        candidateText.setText(surveyCache.getString("candidate", null));
         gradeSpinner.setSelection(surveyCache.getInt("grade", 0));
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -95,6 +97,10 @@ public class Survey extends AppCompatActivity  implements SurveyQuestionFragment
         EditText schoolText = (EditText) findViewById(R.id.school);
         if(schoolText.getText() != null)
             surveyCacheEditor.putString("school", schoolText.getText().toString()).commit();
+
+        EditText candidateText = (EditText) findViewById(R.id.candidateId);
+        if(candidateText.getText() != null)
+            surveyCacheEditor.putString("candidate", candidateText.getText().toString()).commit();
     }
 
     public void onSubmit(View view) {
@@ -102,17 +108,31 @@ public class Survey extends AppCompatActivity  implements SurveyQuestionFragment
         SurveyModel model = new SurveyModel(settings.getString("user_id", null), new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date()), "");
 
         EditText schoolText = (EditText) findViewById(R.id.school);
+        EditText candidateText = (EditText) findViewById(R.id.candidateId);
 
         Spinner gradeSpinner = (Spinner) findViewById(R.id.grade);
 
-        if(schoolText.getText().toString() == null || gradeSpinner.getSelectedItemId() == 0 || schoolText.getText().toString().equals(""))
+        if(schoolText.getText().toString() == null || schoolText.getText().toString().equals(""))
         {
-            Toast.makeText(Survey.this, "Please Enter all values", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Survey.this, "Please enter your school", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(gradeSpinner.getSelectedItemId() == 0)
+        {
+            Toast.makeText(Survey.this, "Please enter your grade", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(candidateText.getText().toString() == null || candidateText.getText().toString().equals("")|| candidateText.getText().toString().length() < 6)
+        {
+            Toast.makeText(Survey.this, "Please enter your candidate ID", Toast.LENGTH_SHORT).show();
             return;
         }
 
         model.School = schoolText.getText().toString();
         model.Grade = gradeSpinner.getSelectedItem().toString();
+        model.CandidateId = candidateText.getText().toString();
 
         for(int i = 0; i < surveyQuestions.length; i++)
         {
@@ -127,6 +147,7 @@ public class Survey extends AppCompatActivity  implements SurveyQuestionFragment
         SharedPreferences.Editor surveyCacheEditor = surveyCache.edit();
         surveyCacheEditor.putString("question_Results", model.Result);
         surveyCacheEditor.putString("school", schoolText.getText().toString());
+        surveyCacheEditor.putString("candidate", candidateText.getText().toString());
         surveyCacheEditor.commit();
         SendResults(model);
     }
@@ -147,7 +168,7 @@ public class Survey extends AppCompatActivity  implements SurveyQuestionFragment
 
                         mDatabase = FirebaseRepository.getDatabaseInstance().getReference();
                         mDatabase.child("survey")
-                                .child(modelId)
+                                .child(model.User)
                                 .setValue(model);
 
                         if(EmailSender.IsOnline(Survey.this))

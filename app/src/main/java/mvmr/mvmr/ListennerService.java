@@ -17,7 +17,6 @@ import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
@@ -45,8 +44,6 @@ public class ListennerService extends Service {
             // Normally we would do some work here, like download a file.
             // For our sample, we just sleep for 5 seconds.
             try {
-                FirebaseApp.initializeApp(ListennerService.this);
-
                 on = new ScreenOnReceiver();
                 off = new ScreenOffReceiver();
 
@@ -60,10 +57,10 @@ public class ListennerService extends Service {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-//                            Toast.makeText(ListennerService.this, "login success", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ListennerService.this, "login success", Toast.LENGTH_SHORT).show();
                         }
                         else{
-//                            Toast.makeText(ListennerService.this, "login failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ListennerService.this, "login failed", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -92,10 +89,8 @@ public class ListennerService extends Service {
         // Get the HandlerThread's Looper and use it for our Handler
         mServiceLooper = thread.getLooper();
         mServiceHandler = new ServiceHandler(mServiceLooper);
-
-        // setup handler for uncaught exception
-        defaultUEH = Thread.getDefaultUncaughtExceptionHandler();
-        Thread.setDefaultUncaughtExceptionHandler(uncaughtExceptionHandler);
+        FirebaseApp.initializeApp(ListennerService.this);
+        mAuth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -125,42 +120,5 @@ public class ListennerService extends Service {
         this.unregisterReceiver(on);
         this.unregisterReceiver(off);
         stopSelf();
-//        Toast.makeText(this, "service done", Toast.LENGTH_SHORT).show();
     }
-
-    //restart a killed service
-    //https://stackoverflow.com/questions/8943288/how-to-implement-uncaughtexception-android
-    @Override
-    public void onTaskRemoved(Intent rootIntent) {
-            /*Intent restartServiceTask = new Intent(getApplicationContext(),this.getClass());
-            restartServiceTask.setPackage(getPackageName());
-            PendingIntent servicex = PendingIntent.getService(
-                    this,
-                    1,
-                    restartServiceTask,
-                    0);
-            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-            alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime()
-                    + 1000, servicex);
-            super.onTaskRemoved(rootIntent);*/
-    }
-
-    private Thread.UncaughtExceptionHandler defaultUEH;
-    private Thread.UncaughtExceptionHandler uncaughtExceptionHandler = new Thread.UncaughtExceptionHandler() {
-
-        @Override
-        public void uncaughtException(Thread thread, Throwable ex) {
-            Intent restartServiceTask = new Intent(getApplicationContext(),this.getClass());
-            restartServiceTask.setPackage(getPackageName());
-            PendingIntent servicex = PendingIntent.getService(
-                    getApplicationContext(),
-                    1,
-                    restartServiceTask,
-                    0);
-            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-            alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime()
-                    + 1000, servicex);
-            System.exit(2);
-        }
-    };
 }

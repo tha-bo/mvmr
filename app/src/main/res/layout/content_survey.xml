@@ -81,9 +81,37 @@
                 android:paddingRight="10dp"/>
 
             <TextView
-                android:id="@+id/surveyInstructions"
+                android:id="@+id/candidateIdInstructions"
                 android:layout_marginTop="30dp"
                 android:layout_below="@id/grade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="@string/candidateId_Instructions" />
+
+            <EditText
+                android:id="@+id/candidateId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:maxLength="6"
+                android:hint="@string/candidateIdText"
+                android:inputType="text"
+                android:layout_marginTop="30dp"
+                android:layout_below="@id/candidateIdInstructions"
+                android:scrollHorizontally="false"
+                android:background="@drawable/layout_rounded"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:nextFocusUp="@id/candidateId"
+                android:nextFocusLeft="@id/candidateId"/>
+
+            <TextView
+                android:id="@+id/surveyInstructions"
+                android:layout_marginTop="30dp"
+                android:layout_below="@id/candidateId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"

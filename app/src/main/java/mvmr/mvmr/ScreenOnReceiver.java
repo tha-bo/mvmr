@@ -3,19 +3,13 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.SystemClock;
+import android.util.Log;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import org.joda.time.LocalDateTime;
 
 import mvmr.mvmr.models.UsageItem;
-import mvmr.mvmr.models.UsageModel;
-import mvmr.mvmr.models.UserModel;
 
 public class ScreenOnReceiver extends BroadcastReceiver {
 
@@ -27,70 +21,43 @@ public class ScreenOnReceiver extends BroadcastReceiver {
         AsyncTask<String, Integer, String> asyncTask = new AsyncTask<String, Integer, String>() {
             @Override
             protected String doInBackground(String... params) {
+                LocalDateTime dt = new LocalDateTime();
+                long time = SystemClock.elapsedRealtime()/1000L;
 
-                String id = new SimpleDateFormat("yyyy:MM:dd_HH:mm:ss").format(new Date());
-                DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                SharedPreferences settings = context.getSharedPreferences("MVMR", 0);
+                SharedPreferences.Editor settingsEditor = settings.edit();
 
-                String userId = GetUser(context.getSharedPreferences("MVMR", 0), context, mDatabase);
-                long time = SystemClock.elapsedRealtime();
-                String lit = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date());
-                SharedPreferences.Editor settingsEditor = context.getSharedPreferences("MVMR", 0).edit();
+                String lit = dt.toString("yyyy:MM:dd HH:mm:ss");
+                settingsEditor.putBoolean("onSave", true);
+                settingsEditor.putLong("onTime", time);
+                settingsEditor.putString("onTimeStamp", lit);
 
-                settingsEditor.putString("row", id);
-                settingsEditor.commit();
+                //start a new day if we must
+                int today = dt.getDayOfWeek();
+                int lastOnDay = settings.getInt("onDay", 0);
 
+                boolean sameDay = (lastOnDay == today);
+                if(!sameDay) {
+                    settingsEditor.putLong("dayTotal", 0L);
+                    settingsEditor.putInt("onDay", today);
+                }
 
-                mDatabase.child("usage").child(userId).child(id).setValue(new UsageItem(lit, time, null, 0));
+                //start a new week if we must
+                int dayOfTheYear = dt.getDayOfYear();
+                int weekEnding = settings.getInt("weekEnding", 0);
 
+                if(dayOfTheYear > weekEnding){
+                    dt.withDayOfWeek(7);
+                    int weekEndingDayOffTheYear = dt.getDayOfYear();
+                    settingsEditor.putInt("weekEnding", weekEndingDayOffTheYear);
+                    settingsEditor.putLong("weekTotal", 0L);
+                }
                 // Must call finish() so the BroadcastReceiver can be recycled.
+                settingsEditor.commit();
                 pendingResult.finish();
                 return "success";
             }
         };
         asyncTask.execute();
-    }
-
-    private String GetUser(SharedPreferences settings, Context context, DatabaseReference database)
-    {
-        String userId = context.getSharedPreferences("MVMR", 0).getString("user_id", null);
-        if(userId == null || userId == "")
-        {
-            userId = new SimpleDateFormat("yyyy:MM:dd_HH:mm:ss_").format(new Date()) + java.util.UUID.randomUUID().toString();
-            SharedPreferences.Editor settingsEditor = settings.edit();
-            settingsEditor.putString("user_id", userId);
-
-            UserModel user = new UserModel(
-                    Build.MANUFACTURER,
-                    Build.MODEL,
-                    Build.VERSION.RELEASE + " | " + Build.VERSION_CODES.class.getFields()[android.os.Build.VERSION.SDK_INT].getName()
-            );
-
-            String[] socialMedia = context.getResources().getStringArray(R.array.known_sm);
-
-            for (String sm : socialMedia) {
-                if (appInstalledOrNot(sm.split(",")[0], context)) {
-                    user.SocialMedia += sm.split(",")[1] + " ";
-                }
-            }
-
-            database.child("users").child(userId).setValue(user);
-        }
-        return userId;
-    }
-
-    private boolean appInstalledOrNot(String uri, Context context)
-    {
-        PackageManager pm = context.getPackageManager();
-        boolean app_installed = false;
-        try
-        {
-            pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES);
-            app_installed = true;
-        }
-        catch (PackageManager.NameNotFoundException e)
-        {
-            app_installed = false;
-        }
-        return app_installed ;
     }
 }

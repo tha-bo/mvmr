@@ -38,8 +38,10 @@ public class EmailSender {
 
     public static void SendSurvey(Activity context, SurveyModel model)
     {
-        Send(context, "Survey Result", "School: " + model.School + " ;" + "\n\n" +
+        Send(context, "Survey Result",
+                "School: " + model.School + " ;" + "\n\n" +
                 "Grade: " + model.Grade + " ;" + "\n\n" +
+                "CandidateId: " + model.CandidateId + " ;" + "\n\n" +
                 "Survey Result: " + model.Result);
     }
 
@@ -50,6 +52,7 @@ public class EmailSender {
                 "Platform Occurred: " + model.PlatformOccurred + " ;" + "\n\n" +
                 "Is Victim: " + model.IsVictim + " ;" + "\n\n" +
                 "Has Image: " + model.HasImage + " ;" + "\n\n" +
+                "Contact Detail: " + model.Contact + " ;" + "\n\n" +
                 "Inform School: " + model.InformSchool);
     }
 

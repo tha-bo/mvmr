@@ -142,4 +142,8 @@ School Name
         <item>name</item>
     </string-array>
     <string name="informSchool">Do you wish for us to inform your school of this event?</string>
+    <string name="candidateIdText">candidate Id</string>
+    <string name="candidateId_Instructions">Your candidate Id is the first 3 letters of your name alongside the first 3 letters of your surname ie Thomas Mbeki would THOMBE</string>
+    <string name="contactDetailsHint">phone number/email</string>
+    <string name="contact_DetailsText">If you wish for us to contact you, please enter a phone number or email address below</string>
 </resources>

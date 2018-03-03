@@ -81,6 +81,7 @@ public class Report extends AppCompatActivity implements DatePickerFragment.OnDa
         });
 
         EditText r_description = (EditText) findViewById(R.id.report_description);
+        EditText r_contactDetails = (EditText) findViewById(R.id.report_contactDetails);
 
         Spinner r_platform = (Spinner) findViewById(R.id.report_platform);
         r_platform.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
@@ -122,6 +123,7 @@ public class Report extends AppCompatActivity implements DatePickerFragment.OnDa
 
         r_date.setText(reportCache.getString("date", null));
         r_description.setText(reportCache.getString("description", null));
+        r_contactDetails.setText(reportCache.getString("contactDetails", null));
         r_platform.setSelection(reportCache.getInt("platform", 0));
         r_victim.setSelection(reportCache.getInt("victim", 0));
 
@@ -170,15 +172,32 @@ public class Report extends AppCompatActivity implements DatePickerFragment.OnDa
     {
         EditText r_date = (EditText) findViewById(R.id.report_date);
         EditText r_description = (EditText) findViewById(R.id.report_description);
+        EditText r_contactDetails = (EditText) findViewById(R.id.report_contactDetails);
         Spinner r_platform = (Spinner) findViewById(R.id.report_platform);
         Spinner r_victim = (Spinner) findViewById(R.id.report_victim);
         CheckBox r_inform = (CheckBox) findViewById(R.id.inform_school);
 
-        if(r_date.getText().toString() == null || r_date.getText().toString().equals("") ||
-           r_description.getText().toString() == null || r_description.getText().toString().equals("") ||
-           r_platform.getSelectedItemId() == 0 || r_victim.getSelectedItemId() == 0 )
+        if(r_date.getText().toString() == null || r_date.getText().toString().equals("") )
         {
-            Toast.makeText(Report.this, "Please enter all values", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Report.this, "Please enter the date of occurrence", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(r_description.getText().toString() == null || r_description.getText().toString().equals(""))
+        {
+            Toast.makeText(Report.this, "Please enter a description", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(r_platform.getSelectedItemId() == 0)
+        {
+            Toast.makeText(Report.this, "Please enter the platform of occurrence", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(r_victim.getSelectedItemId() == 0 )
+        {
+            Toast.makeText(Report.this, "Please enter who the victim was", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -188,7 +207,7 @@ public class Report extends AppCompatActivity implements DatePickerFragment.OnDa
                 r_description.getText().toString(),
                 r_platform.getSelectedItem().toString(),
                 r_victim.getSelectedItem().toString(),
-                r_inform.isChecked()
+                r_inform.isChecked(), r_contactDetails.getText().toString()
         );
         SendResults(model);
     }
