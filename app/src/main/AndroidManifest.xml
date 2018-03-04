@@ -83,6 +83,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="mvmr.mvmr.Home" />
         </activity>
+        <activity
+            android:name=".RateActivity"
+            android:label="@string/title_activity_rate"
+            android:parentActivityName=".Home"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="mvmr.mvmr.Home" />
+        </activity>
     </application>
 
 </manifest>

@@ -23,6 +23,16 @@
         <item>I am comfortable using mobile phone technology</item>
         <item>I feel confident using mobile phone technology</item>
     </string-array>
+    <string-array name="ratings">
+        <item>How well do you think the interface looks?</item>
+        <item>What is the quality of the MVMR application?</item>
+        <item>How would you rate the font size and text?</item>
+        <item>Are you able to access the app easily?</item>
+        <item>Is it available when you need it?</item>
+        <item>Was the About page useful?</item>
+        <item>Was the How To page informative or useful?</item>
+        <item>Does the Report page capture what you felt it needs to capture?</item>
+    </string-array>
     <string-array name="report_platform_entries">
         <item>What platform did it occur on?</item>
         <item>Voice Call</item>
@@ -91,7 +101,7 @@ Please ensure you have a data connection and take the survey on the next page. T
 After the survey, you can report on mobile victimisation and view sources which may inform you on how to cope with mobile victimisation.
     </string>
 
-<string name="reportHowTo">
+    <string name="reportHowTo">
 This report allows you to send a message which will be delivered to us. If you select the option, we can inform your school of the situation as soon as possible. If you wish for your school not to be contacted, please refer to the "Contacts" page for sources which may inform you on how to cope with victimisation.
 </string>
 
@@ -143,7 +153,16 @@ School Name
     </string-array>
     <string name="informSchool">Do you wish for us to inform your school of this event?</string>
     <string name="candidateIdText">candidate Id</string>
-    <string name="candidateId_Instructions">Your candidate Id is the first 3 letters of your name alongside the first 3 letters of your surname ie Thomas Mbeki would THOMBE</string>
+    <string name="candidateId_Instructions">Your candidate Id is the first 3 letters of your First Name + first 3 letters of your Surname ie Thomas Mbeki would be THOMBE</string>
     <string name="contactDetailsHint">phone number/email</string>
     <string name="contact_DetailsText">If you wish for us to contact you, please enter a phone number or email address below</string>
+    <string name="title_activity_rate">Rate MVMR</string>
+    <string name="comment_interface">What do you think about the interface?</string>
+    <string name="comment_access">What do you think about the accessibility?</string>
+    <string name="comment_about">What do you think about the About Page?</string>
+    <string name="comment_howTo">What do you think about the How To Page?</string>
+    <string name="comment_report">What do you think about the Report Page?</string>
+    <string name="comment_general">What do you think of the MVMR App in general?</string>
+    <string name="thankYouRate">Thank you for testing MVMR. Your participation is greatly appreciated! Please help us in evaluating MVMR for future developments by rating the following features below.</string>
+    <string name="optionalComments">Below, where possible, please specify in more detail what you think of the features</string>
 </resources>

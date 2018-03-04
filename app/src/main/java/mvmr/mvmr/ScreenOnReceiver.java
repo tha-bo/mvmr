@@ -1,15 +1,12 @@
 package mvmr.mvmr;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.SystemClock;
-import android.util.Log;
-
 import org.joda.time.LocalDateTime;
-
-import mvmr.mvmr.models.UsageItem;
 
 public class ScreenOnReceiver extends BroadcastReceiver {
 
@@ -49,6 +46,7 @@ public class ScreenOnReceiver extends BroadcastReceiver {
                 if(dayOfTheYear > weekEnding){
                     dt.withDayOfWeek(7);
                     int weekEndingDayOffTheYear = dt.getDayOfYear();
+                    settingsEditor.putString("weekEndingDate", dt.toString("yyyy/MM/dd"));
                     settingsEditor.putInt("weekEnding", weekEndingDayOffTheYear);
                     settingsEditor.putLong("weekTotal", 0L);
                 }

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="mvmr.mvmr.RateActivity"
+    tools:showIn="@layout/activity_rate"
+    android:background="@drawable/img_generic">
+
+    <ScrollView
+        android:id="@+id/ratingScrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.018">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ratingScrollView"
+            app:layout_constraintVertical_bias="0.0">
+
+            <TextView
+                android:id="@+id/ratingsThankYou"
+                android:layout_alignParentTop="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="@string/thankYouRate" />
+
+            <LinearLayout
+                android:id="@+id/ratingsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ratingsThankYou"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></LinearLayout>
+
+            <TextView
+                android:id="@+id/optionalDescriptions"
+                android:layout_marginTop="30dp"
+                android:layout_below="@id/ratingsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="@string/optionalComments" />
+
+            <TextView
+                android:id="@+id/interfaceComment"
+                android:layout_below="@id/optionalDescriptions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="@string/comment_interface" />
+
+            <EditText
+                android:id="@+id/interfaceInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/interfaceComment"
+                android:scrollHorizontally="false"
+                android:background="@drawable/layout_rounded"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:nextFocusUp="@id/interfaceInput"
+                android:nextFocusLeft="@id/interfaceInput"/>
+
+            <TextView
+                android:id="@+id/accessComment"
+                android:layout_marginTop="30dp"
+                android:layout_below="@id/interfaceInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="@string/comment_access" />
+
+            <EditText
+                android:id="@+id/accessInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/accessComment"
+                android:scrollHorizontally="false"
+                android:background="@drawable/layout_rounded"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:nextFocusUp="@id/accessInput"
+                android:nextFocusLeft="@id/accessInput"/>
+
+            <TextView
+                android:id="@+id/aboutComment"
+                android:layout_marginTop="30dp"
+                android:layout_below="@id/accessInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="@string/comment_about" />
+
+            <EditText
+                android:id="@+id/aboutInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/aboutComment"
+                android:scrollHorizontally="false"
+                android:background="@drawable/layout_rounded"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:nextFocusUp="@id/aboutInput"
+                android:nextFocusLeft="@id/aboutInput"/>
+
+            <TextView
+                android:id="@+id/howToComment"
+                android:layout_marginTop="30dp"
+                android:layout_below="@id/aboutInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="@string/comment_howTo" />
+
+            <EditText
+                android:id="@+id/howToInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/howToComment"
+                android:scrollHorizontally="false"
+                android:background="@drawable/layout_rounded"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:nextFocusUp="@id/howToInput"
+                android:nextFocusLeft="@id/howToInput"/>
+
+            <TextView
+                android:id="@+id/reportComment"
+                android:layout_marginTop="30dp"
+                android:layout_below="@id/howToInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="@string/comment_report" />
+
+            <EditText
+                android:id="@+id/reportInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/reportComment"
+                android:scrollHorizontally="false"
+                android:background="@drawable/layout_rounded"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:nextFocusUp="@id/reportInput"
+                android:nextFocusLeft="@id/reportInput"/>
+
+            <TextView
+                android:id="@+id/generalComment"
+                android:layout_marginTop="30dp"
+                android:layout_below="@id/reportInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="@string/comment_general" />
+
+            <EditText
+                android:id="@+id/generalInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/generalComment"
+                android:scrollHorizontally="false"
+                android:background="@drawable/layout_rounded"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:nextFocusUp="@id/generalInput"
+                android:nextFocusLeft="@id/generalInput"/>
+
+            <Button
+                android:id="@+id/submitRate"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_below="@id/generalInput"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                android:layout_weight="1"
+                android:onClick="onSubmit"
+                android:text="Submit" />
+
+        </RelativeLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>

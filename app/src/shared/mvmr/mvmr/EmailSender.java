@@ -19,6 +19,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import mvmr.mvmr.models.RatingsModel;
 import mvmr.mvmr.models.ReportModel;
 import mvmr.mvmr.models.SurveyModel;
 import mvmr.mvmr.models.UserModel;
@@ -43,6 +44,18 @@ public class EmailSender {
                 "Grade: " + model.Grade + " ;" + "\n\n" +
                 "CandidateId: " + model.CandidateId + " ;" + "\n\n" +
                 "Survey Result: " + model.Result);
+    }
+
+    public static void SendRatings(Activity context, RatingsModel model)
+    {
+        Send(context, "Ratings Result",
+                "Interface: " + model.Interface + " ;" + "\n\n" +
+                        "Accessability: " + model.Accessability + " ;" + "\n\n" +
+                        "HowTo: " + model.HowTo + " ;" + "\n\n" +
+                        "About: " + model.About + " ;" + "\n\n" +
+                        "Report: " + model.Report + " ;" + "\n\n" +
+                        "General: " + model.General + " ;" + "\n\n" +
+                        "Ratings: " + model.Ratings);
     }
 
     public static void SendReport(Activity context, ReportModel model)

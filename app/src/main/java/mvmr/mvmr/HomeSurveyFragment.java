@@ -3,6 +3,7 @@ package mvmr.mvmr;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 /**
@@ -29,6 +32,9 @@ public class HomeSurveyFragment extends Fragment {
     private ImageViewPager viewPager;
     Runnable _autoscrollTimer;
     final Handler _autoscrollHandler = new Handler();
+    TextView dailyUsage = null;
+    TextView weeklyUsage = null;
+    SharedPreferences settings;
 
     public HomeSurveyFragment() {
         // Required empty public constructor
@@ -86,6 +92,15 @@ public class HomeSurveyFragment extends Fragment {
             }
         });
 
+        Button btnRate = (Button) view.findViewById(R.id.rate_button);
+        btnRate.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent i = new Intent(_context, RateActivity.class);
+                startActivity(i);
+            }
+        });
+
         Drawable img = getContext().getResources().getDrawable( R.drawable.ic_report );;
         img.setBounds( 0, 0, 96, 96 );
         btnReport.setCompoundDrawables( img, null, null, null );
@@ -99,10 +114,50 @@ public class HomeSurveyFragment extends Fragment {
         img.setBounds( 0, 0, 96, 96 );
         btnContacts.setCompoundDrawables( img, null, null, null );
 
+        img = getContext().getResources().getDrawable( R.drawable.ic_rate );;
+        img.setBounds( 0, 0, 96, 96 );
+        btnRate.setCompoundDrawables( img, null, null, null );
+
+        settings = _context.getSharedPreferences("MVMR", 0);
+        dailyUsage = (TextView) view.findViewById(R.id.dailyUsage);
+        weeklyUsage = (TextView) view.findViewById(R.id.weeklyUsage);
+
+        dailyUsage.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                UpdateUsage();
+            }
+        });
+
+        weeklyUsage.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                UpdateUsage();
+            }
+        });
+
+        SharedPreferences settings = _context.getSharedPreferences("MVMR", 0);
+        long weekTotal = settings.getLong("weekTotal", 0L);
+        long dayTotal = settings.getLong("dayTotal", 0L);
+        String weekEndingDate = settings.getString("weekEndingDate", null);
+
+        if(dayTotal > 0L)
+            dailyUsage.setText("Your mobile usage today is " + dayTotal);
+        if(dayTotal > 0L)
+            weeklyUsage.setText("Your mobile usage for week ending" + weekEndingDate + " is "  + weekTotal);
+
+
         imageAdapter = new ImagePagerAdapter(_context);
         viewPager = (ImageViewPager) view.findViewById(R.id.pager);
         viewPager.setAdapter(imageAdapter);
         SetUpAutoScroll(viewPager);
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        UpdateUsage();
     }
 
     @Override
@@ -140,5 +195,17 @@ public class HomeSurveyFragment extends Fragment {
     public void onDestroy() {
         _autoscrollHandler.removeCallbacks(_autoscrollTimer);
         super.onDestroy();
+    }
+
+    private void UpdateUsage()
+    {
+        long weekTotal = settings.getLong("weekTotal", 0L);
+        long dayTotal = settings.getLong("dayTotal", 0L);
+        String weekEndingDate = settings.getString("weekEndingDate", null);
+
+        if(dayTotal > 0L && dailyUsage != null)
+            dailyUsage.setText("Your last recorded usage today totals " + (int)(dayTotal/60) + " minutes");
+        if(dayTotal > 0L&& weeklyUsage != null)
+            weeklyUsage.setText("Your last recorded usage for week ending " + weekEndingDate + " totals "  + (int)(weekTotal/60) + " minutes");
     }
 }

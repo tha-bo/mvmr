@@ -19,6 +19,7 @@
 
 
         <LinearLayout
+            android:id="@+id/mainLayout"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:orientation="vertical"
@@ -51,17 +52,56 @@
                 android:textColor="@color/white" />
 
             <Button
-                android:id="@+id/about_button"
+            android:id="@+id/about_button"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="About MVMR"
+            android:textStyle="bold"
+            android:textSize="@dimen/textSizeHomeScreen"
+            android:textAlignment="viewStart"
+            android:layout_gravity="start"
+            android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/rate_button"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="About MVMR"
+                android:text="Rate MVMR"
                 android:textStyle="bold"
                 android:textSize="@dimen/textSizeHomeScreen"
                 android:textAlignment="viewStart"
                 android:layout_gravity="start"
                 android:textColor="@color/white" />
+
+            <LinearLayout
+                android:id="@+id/usage_Data"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@+id/mainLayout">
+
+                <TextView
+                    android:id="@+id/dailyUsage"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="" />
+                <TextView
+                    android:id="@+id/weeklyUsage"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="" />
+            </LinearLayout>
         </LinearLayout>
+
+
     </RelativeLayout>
 </FrameLayout>

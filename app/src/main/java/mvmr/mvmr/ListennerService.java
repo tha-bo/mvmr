@@ -57,10 +57,10 @@ public class ListennerService extends Service {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(ListennerService.this, "login success", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(ListennerService.this, "login success", Toast.LENGTH_SHORT).show();
                         }
                         else{
-                            Toast.makeText(ListennerService.this, "login failed", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(ListennerService.this, "login failed", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
