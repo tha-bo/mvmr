@@ -223,7 +223,7 @@ School Name
     <string name="comment_general">What do you think of the MVMR App in general?</string>
     <string name="comment_statistics">What do you think about the usage statistics?</string>
     <string name="thankYouRate">Thank you for testing MVMR. Your participation is greatly appreciated! Please help us in evaluating MVMR for future developments by rating the following features below.</string>
-    <string name="optionalComments">“Below, where possible, please comment in more detail what you think of the features.</string>
-    <string name="usageMessage">Frequently using your mobile phone has been reported to influence victimisation. So, please keep note of your usage</string>
-    <string name="uploadMessage">Please upload an image or screenshot of the bullying incident</string>
+    <string name="optionalComments">Below, where possible, please comment in more detail what you think of the features.</string>
+    <string name="usageMessage">Frequently using your mobile phone has been reported to influence victimisation. So, please keep note of your usage.</string>
+    <string name="uploadMessage">Please upload an image or screenshot of the bullying incident by tapping the image below</string>
 </resources>

@@ -207,7 +207,6 @@ public class HomeSurveyFragment extends Fragment {
         String weekEndingDate = tray.getString("weekEndingDate", null);
 
 
-        Toast.makeText(_context, "login asdasdasdasdasd" + (int)(dayTotal/60), Toast.LENGTH_SHORT).show();
         if(dayTotal > 0L && dailyUsage != null)
             dailyUsage.setText("Your last recorded usage today totals " + (int)(dayTotal/60) + " minutes");
         if(dayTotal > 0L&& weeklyUsage != null)
