@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="mvmr.mvmr.Home"
+    tools:context="reporting.mvmr.Home"
     tools:showIn="@layout/activity_home"
     android:background="@drawable/img_generic">
 

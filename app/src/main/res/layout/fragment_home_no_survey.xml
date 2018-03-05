@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="mvmr.mvmr.HomeNoSurveyFragment">
+    tools:context="reporting.mvmr.HomeNoSurveyFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -24,6 +24,14 @@
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 app:srcCompat="@drawable/ic_howto" />
+
+            <TextView
+                android:id="@+id/text_howTo1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginBottom="8dp"
+                android:text="@string/howTo1" />
 
             <TextView
                 android:id="@+id/text_howTo2"
@@ -65,6 +73,40 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:text="@string/howTo4" />
+
+            <TextView
+                android:id="@+id/header_howTo5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/white"
+                android:text="Step 3"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_howTo5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="@string/howTo5" />
+
+            <TextView
+                android:id="@+id/header_howTo6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/white"
+                android:text="Step 4"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_howTo6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="@string/howTo6" />
 
             <Button
                 android:id="@+id/survey_button2"

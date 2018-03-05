@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context="mvmr.mvmr.Home">
+    tools:context="reporting.mvmr.Home">
 
     <include
         layout="@layout/content_home"

@@ -22,23 +22,48 @@
         <item>I have been unable to reduce the number of times I use my mobile phone</item>
         <item>I am comfortable using mobile phone technology</item>
         <item>I feel confident using mobile phone technology</item>
+
+        <item>I have reported being mobile bullied</item>
+        <item>There are mobile bullying interventions at school or at home</item>
+        <item>These interventions work efficiently</item>
+        <item>I have reported being mobile bullied to any law enforcement (SAPS)</item>
+        <item>I have reported being mobile bullied to my friends.</item>
+        <item>I have reported being mobile bullied to my parents or family.</item>
+        <item>I have reported being mobile bullied to the school.</item>
+        <item>I have reported being bullied to Social Media Apps (e.g. Facebook, Twitter, Instagram)</item>
+        <item>I have reported being bullied to Chat Apps (e.g. Hangouts, WhatsApp,BBM)</item>
+        <item>Reporting on social media apps and chat apps is effective</item>
+        <item>Fear influences whether I report mobile bullying.</item>
+        <item>Shock/Surprise influences whether I report mobile bullying.</item>
+        <item>Anger influences whether I report mobile bullying.</item>
+        <item>Sadness influences whether I report mobile bullying.</item>
+        <item>Other emotions influences whether I report mobile bullying.</item>
+        <item>The benefits of reporting outweigh the consequences of reporting.</item>
     </string-array>
     <string-array name="ratings">
-        <item>How well do you think the interface looks?</item>
-        <item>What is the quality of the MVMR application?</item>
-        <item>How would you rate the font size and text?</item>
-        <item>Are you able to access the app easily?</item>
-        <item>Is it available when you need it?</item>
-        <item>Was the About page useful?</item>
-        <item>Was the How To page informative or useful?</item>
-        <item>Does the Report page capture what you felt it needs to capture?</item>
+        <item>Please rate how the MVMR application looks</item>
+        <item>Please rate the quality of the MVMR application</item>
+        <item>Please rate the font size and text of the MVMR application</item>
+        <item>Are you able to access the MVMR application easily?</item>
+        <item>Is the MVMR application available when you need it?</item>
+        <item>Was the “How to Page” of the MVMR application informative or useful?</item>
+        <item>Was the “About Page” of the MVMR application informative or useful?</item>
+        <item>Please rate the ”Report Page” of the MVMR application?</item>
+        <item>Does the “Report Page” capture what you feel it should capture?</item>
+        <item>Is uploading an image in the Report Page” useful?</item>
+        <item>On the home page of the MVMR application, your mobile phone usage is shown. Please rate the usefulness of this feature.</item>
     </string-array>
     <string-array name="report_platform_entries">
         <item>What platform did it occur on?</item>
         <item>Voice Call</item>
         <item>Text Message</item>
-        <item>Chat App</item>
-        <item>Social Media</item>
+        <item>WhatsApp</item>
+        <item>Hangouts</item>
+        <item>BBM</item>
+        <item>Facebook</item>
+        <item>Twitter</item>
+        <item>Instagram</item>
+        <item>Qoohme</item>
         <item>Other</item>
     </string-array>
     <string-array name="report_victim_entries">
@@ -54,6 +79,31 @@
         <item>Grade 10</item>
         <item>Grade 11</item>
         <item>Grade 12</item>
+    </string-array>
+    <string-array name="race_entries">
+        <item>What Race are you?</item>
+        <item>African</item>
+        <item>Asian</item>
+        <item>Coloured</item>
+        <item>Indian</item>
+        <item>White</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="sex_entries">
+        <item>What Sex are you?</item>
+        <item>Female</item>
+        <item>Male</item>
+        <item>Other</item>
+        <item>Prefer not to say</item>
+    </string-array>
+    <string-array name="age_entries">
+        <item>How old are you?</item>
+        <item>13 and below</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18 and above</item>
     </string-array>
     <string name="report_victim_text">Were you the victim?</string>
     <string name="report_platform_text">What platform did it occur on?</string>
@@ -86,7 +136,7 @@ In monitoring and reporting mobile victimisation using the MVRM app, it is inten
     </string>
 
     <string name="howTo1">
-Before you use the MVMR application, please read and understand the page "About Mobile Victimisation". This page should help you understand what mobile victimisation is, where it stems from and how it may have or is affecting you.
+Mobile bullying is a form of cyberbullying through email, chatrooms, social media, instant messaging and small text messages using mobile phones. Mobile victimisation is what someone who is bullied over the phone experiences.
     </string>
 
     <string name="howTo2">
@@ -99,6 +149,14 @@ Please ensure you have a data connection and take the survey on the next page. T
 
     <string name="howTo4">
 After the survey, you can report on mobile victimisation and view sources which may inform you on how to cope with mobile victimisation.
+    </string>
+
+    <string name="howTo5">
+Please keep a look out for your daily and weekly usage on the Home Page of the MVMR Application.
+    </string>
+
+    <string name="howTo6">
+Please, whenever you are free, RATE THIS APP on the page named “Rate MVMR”. It will not take up much of your time and you may rate it at any point in time, but please do so after you have familiarized yourself with the application.
     </string>
 
     <string name="reportHowTo">
@@ -163,6 +221,9 @@ School Name
     <string name="comment_howTo">What do you think about the How To Page?</string>
     <string name="comment_report">What do you think about the Report Page?</string>
     <string name="comment_general">What do you think of the MVMR App in general?</string>
+    <string name="comment_statistics">What do you think about the usage statistics?</string>
     <string name="thankYouRate">Thank you for testing MVMR. Your participation is greatly appreciated! Please help us in evaluating MVMR for future developments by rating the following features below.</string>
-    <string name="optionalComments">Below, where possible, please specify in more detail what you think of the features</string>
+    <string name="optionalComments">“Below, where possible, please comment in more detail what you think of the features.</string>
+    <string name="usageMessage">Frequently using your mobile phone has been reported to influence victimisation. So, please keep note of your usage</string>
+    <string name="uploadMessage">Please upload an image or screenshot of the bullying incident</string>
 </resources>

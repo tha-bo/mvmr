@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context="mvmr.mvmr.SurveyQuestionFragment"
+    tools:context="reporting.mvmr.SurveyQuestionFragment"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="81dp"
     android:background="@drawable/layout_rounded"

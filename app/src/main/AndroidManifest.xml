@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="mvmr.mvmr">
+    package="reporting.mvmr">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Home"
+            android:name="reporting.mvmr.Home"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -25,39 +25,39 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AboutActivity"
+            android:name="reporting.mvmr.AboutActivity"
             android:label="@string/title_activity_about"
-            android:parentActivityName=".Home"
+            android:parentActivityName="reporting.mvmr.Home"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <receiver
-            android:name=".ScreenOnReceiver"
+            android:name="reporting.mvmr.ScreenOnReceiver"
             android:enabled="true"
             android:exported="true" />
 
         <service
-            android:name=".ListennerService"
+            android:name="reporting.mvmr.ListennerService"
             android:enabled="true"
             android:exported="true"
             android:process=":remoteMVMR" />
 
         <receiver
-            android:name=".ScreenOffReceiver"
+            android:name="reporting.mvmr.ScreenOffReceiver"
             android:enabled="true"
             android:exported="true" />
 
         <activity
-            android:name=".Survey"
+            android:name="reporting.mvmr.Survey"
             android:label="@string/title_activity_survey"
-            android:parentActivityName=".Home"
+            android:parentActivityName="reporting.mvmr.Home"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="mvmr.mvmr.Home" />
+                android:value="reporting.mvmr.Home" />
         </activity>
 
         <receiver
-            android:name=".WakeReceiver"
+            android:name="reporting.mvmr.WakeReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -66,31 +66,31 @@
         </receiver>
 
         <activity
-            android:name=".Report"
+            android:name="reporting.mvmr.Report"
             android:label="@string/title_activity_report"
-            android:parentActivityName=".Home"
+            android:parentActivityName="reporting.mvmr.Home"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="mvmr.mvmr.Home" />
+                android:value="reporting.mvmr.Home" />
         </activity>
         <activity
-            android:name=".Contacts"
+            android:name="reporting.mvmr.Contacts"
             android:label="@string/title_activity_contacts"
-            android:parentActivityName=".Home"
+            android:parentActivityName="reporting.mvmr.Home"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="mvmr.mvmr.Home" />
+                android:value="reporting.mvmr.Home" />
         </activity>
         <activity
-            android:name=".RateActivity"
+            android:name="reporting.mvmr.RateActivity"
             android:label="@string/title_activity_rate"
-            android:parentActivityName=".Home"
+            android:parentActivityName="reporting.mvmr.Home"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="mvmr.mvmr.Home" />
+                android:value="reporting.mvmr.Home" />
         </activity>
     </application>
 

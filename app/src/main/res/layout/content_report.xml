@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="mvmr.mvmr.Report"
+    tools:context="reporting.mvmr.Report"
     tools:showIn="@layout/activity_report"
     android:background="@drawable/img_generic">
 
@@ -78,7 +78,14 @@
                 android:nextFocusUp="@id/report_description"
                 android:nextFocusLeft="@id/report_description"/>
 
-
+            <TextView
+                android:layout_marginTop="20dp"
+                android:id="@+id/report_uploadMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:paddingTop="10dp"
+                android:text="@string/uploadMessage" />
 
             <ImageButton
                 android:layout_marginTop="15dp"
@@ -147,7 +154,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:focusable="false"
                 android:hint="@string/contactDetailsHint"
                 android:inputType="none"
                 android:longClickable="false"

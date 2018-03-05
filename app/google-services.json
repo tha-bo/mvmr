@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "420819124087-dempmef1jss4nk47b1fb0kkihmfau6k0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mvmr.mvmr",
+            "certificate_hash": "046450f90c77d0e15216e4369eaac05dd6aa0001"
+          }
+        },
+        {
           "client_id": "420819124087-t9sboqjnvf230tfhd5vhkmm5lq5gncok.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,57 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "420819124087-t9sboqjnvf230tfhd5vhkmm5lq5gncok.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:420819124087:android:5bd49514dfd7bea4",
+        "android_client_info": {
+          "package_name": "reporting.mvmr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "420819124087-ks0nn8chlv3t5ggit75klajks75r2lhf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "reporting.mvmr",
+            "certificate_hash": "046450f90c77d0e15216e4369eaac05dd6aa0001"
+          }
+        },
+        {
+          "client_id": "420819124087-t9sboqjnvf230tfhd5vhkmm5lq5gncok.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsMZOy7EqmhWkqKuyTlgf3Yg19C6sNBgs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "420819124087-t9sboqjnvf230tfhd5vhkmm5lq5gncok.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

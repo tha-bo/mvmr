@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="mvmr.mvmr.RateActivity"
+    tools:context="reporting.mvmr.RateActivity"
     tools:showIn="@layout/activity_rate"
     android:background="@drawable/img_generic">
 
@@ -201,9 +201,35 @@
                 android:nextFocusLeft="@id/reportInput"/>
 
             <TextView
-                android:id="@+id/generalComment"
+                android:id="@+id/statComment"
                 android:layout_marginTop="30dp"
                 android:layout_below="@id/reportInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="@string/comment_statistics" />
+
+            <EditText
+                android:id="@+id/statInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/statComment"
+                android:scrollHorizontally="false"
+                android:background="@drawable/layout_rounded"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:nextFocusUp="@id/statInput"
+                android:nextFocusLeft="@id/statInput"/>
+
+            <TextView
+                android:id="@+id/generalComment"
+                android:layout_marginTop="30dp"
+                android:layout_below="@id/statInput"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
